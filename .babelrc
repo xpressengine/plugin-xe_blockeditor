@@ -1,0 +1,19 @@
+{
+  "presets": [
+    ["@babel/preset-env", {
+      "targets": {
+        "browsers": ["last 2 versions", "ie >= 10"]
+      }
+    }],
+    "@babel/preset-react"
+  ],
+  "plugins": [[ "babel-plugin-transform-react-jsx", {
+    "pragma": "createElement"
+} ],
+    ["babel-plugin-transform-builtin-extend", {
+      "globals": ["Error", "Array"],
+      "approximate": true
+    }]
+  ]
+}
+

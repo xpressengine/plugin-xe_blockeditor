@@ -1,0 +1,44 @@
+{
+  "name": "xpressengine-plugin/blockeditor",
+  "description": "Blockeditor 에디터를 제공합니다.",
+  "keywords": ["xpressengine bundle", "XE Blockeditor"],
+  "version": "1.0.4",
+  "support": {
+    "email": "developers@xpressengine.com"
+  },
+  "authors": [
+    {
+      "name": "XE Developers",
+      "email": "developers@xpressengine.com",
+      "homepage": "https://store.xehub.io/plugins/blockeditor",
+      "role": "Developer"
+    }
+  ],
+  "license": "LGPL-3.0-or-later",
+  "type": "xpressengine-plugin",
+  "extra": {
+    "xpressengine": {
+      "title": "Blockeditor",
+      "icon": "icon.png",
+      "component": {
+        "editor/blockeditor@blockeditor": {
+          "class": "Xpressengine\\Plugins\\Blockeditor\\Editors\\Blockeditor",
+          "name": "Blockeditor",
+          "description": "XE 에서 사용할 기본 에디터"
+        }
+      }
+    }
+  },
+  "require": {
+    "xpressengine/xpressengine": "~3.0.4"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.0",
+    "mockery/mockery": "dev-master@dev"
+  },
+  "autoload": {
+    "psr-4": {
+      "Xpressengine\\Plugins\\Blockeditor\\": "src/"
+    }
+  }
+}
