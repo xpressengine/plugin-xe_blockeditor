@@ -22,7 +22,7 @@
       "icon": "icon.png",
       "component": {
         "editor/blockeditor@blockeditor": {
-          "class": "Xpressengine\\Plugins\\Blockeditor\\Editors\\Blockeditor",
+          "class": "Xpressengine\\Plugins\\Blockeditor\\Components\\Editors\\Blockeditor",
           "name": "Blockeditor",
           "description": "XE 에서 사용할 기본 에디터"
         }
@@ -38,7 +38,8 @@
   },
   "autoload": {
     "psr-4": {
-      "Xpressengine\\Plugins\\Blockeditor\\": "src/"
+      "Xpressengine\\Plugins\\Blockeditor\\": "src/",
+      "Xpressengine\\Plugins\\Blockeditor\\Components\\": "components/"
     }
   }
 }

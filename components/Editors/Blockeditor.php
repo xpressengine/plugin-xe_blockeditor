@@ -12,7 +12,7 @@
  * @link        https://xpressengine.io
  */
 
-namespace Xpressengine\Plugins\Blockeditor\Editors;
+namespace Xpressengine\Plugins\Blockeditor\Components\Editors;
 
 use Illuminate\Contracts\Routing\UrlGenerator;
 use Xpressengine\Editor\AbstractEditor;
@@ -46,7 +46,7 @@ class Blockeditor extends AbstractEditor
         $this->initAssets();
 
         $content = parent::render();
-        $content .= '@@@@@@@@@@@@@';
+        $content .= '블록에디터';
 
         $this->arguments['content'] = str_replace(['&lt;', '&gt;'], ['&amp;lt;', '&amp;gt;'], $this->arguments['content']);
         return $this->renderPlugins($content, $this->scriptOnly);
