@@ -45,8 +45,20 @@ class Blockeditor extends AbstractEditor
     {
         $this->initAssets();
 
-        $content = parent::render();
-        $content .= '블록에디터';
+        $script = <<<'DDD'
+        <script>
+            window.addEventListener('DOMContentLoaded', () => {
+                Laraberg.init('xeContentEditor', {
+                    laravelFilemanager: false,
+                    searchCb: null
+                })
+            })
+        </script>
+DDD;
+        $content = '<div class="write_form_editor" style="width: 100vw; left: 50%; margin-left: -50vw; position: relative;">';
+        $content .= parent::render();
+        $content .= '</div>';
+        $content .= $script;
 
         $this->arguments['content'] = str_replace(['&lt;', '&gt;'], ['&amp;lt;', '&amp;gt;'], $this->arguments['content']);
         return $this->renderPlugins($content, $this->scriptOnly);
