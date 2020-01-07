@@ -55,10 +55,9 @@ class Blockeditor extends AbstractEditor
             })
         </script>
 DDD;
-        $content = '<div class="write_form_editor" style="width: 1460px; position: relative; margin-left: -62px;">';
+        $content = '<div class="write_form_editor">';
         $content .= parent::render();
         $content .= '</div>';
-        $content .= '<style>.edit-post-visual-editor .block-editor-block-list__block { margin-left: 0; margin-right: 0; }</style>';
         $content .= $script;
 
         $this->arguments['content'] = str_replace(['&lt;', '&gt;'], ['&amp;lt;', '&amp;gt;'], $this->arguments['content']);
