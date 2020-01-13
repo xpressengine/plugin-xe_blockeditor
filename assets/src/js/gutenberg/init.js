@@ -42,8 +42,8 @@ export default function init (target, options = {}) {
 function createEditorElement (target) {
   const element = document.getElementById(target)
   const editor = document.createElement('DIV')
-  editor.id = 'laraberg__editor'
-  editor.classList.add('laraberg__editor', 'gutenberg__editor', 'block-editor__container', 'wp-embed-responsive')
+  editor.id = 'xe-blockeditor__editor'
+  editor.classList.add('xe-blockeditor__editor', 'gutenberg__editor', 'block-editor__container', 'wp-embed-responsive')
   element.parentNode.insertBefore(editor, element)
   element.hidden = true
 

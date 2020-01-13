@@ -9,9 +9,9 @@ const externals = {
 
 module.exports = {
   mode: process.env.NODE_ENV,
-  entry: './assets/src/js/laraberg.js',
+  entry: './assets/src/js/xe-blockeditor.js',
   output: {
-    filename: 'laraberg.js',
+    filename: 'xe-blockeditor.js',
     path: path.resolve(__dirname, 'assets')
   },
   devtool: 'source-map',
@@ -39,6 +39,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new MiniCssExtractPlugin({ filename: 'laraberg.css' })
+    new MiniCssExtractPlugin({ filename: 'xe-blockeditor.css' })
   ]
 }

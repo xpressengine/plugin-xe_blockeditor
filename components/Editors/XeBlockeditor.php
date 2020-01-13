@@ -94,11 +94,11 @@ DDD;
             $this->frontend->js([
                 'https://unpkg.com/react@16.8.6/umd/react.production.min.js',
                 'https://unpkg.com/react-dom@16.8.6/umd/react-dom.production.min.js',
-                plugin::asset('assets/laraberg.js')
+                plugin::asset('assets/xe-blockeditor.js')
             ])->before('assets/core/editor/editor.bundle.js')->load();
 
             $this->frontend->css([
-                plugin::asset('assets/laraberg.css')
+                plugin::asset('assets/xe-blockeditor.css')
             ])->load();
 
             $lang = require realpath(__DIR__.'/../../langs') . '/lang.php';
@@ -153,7 +153,7 @@ DDD;
     protected function compileBody($content)
     {
         $this->frontend->css([
-            plugin::asset('assets/laraberg.css')
+            plugin::asset('assets/xe-blockeditor.css')
         ])->load();
 
         // @deprecated `.__xe_contents_compiler` https://github.com/xpressengine/xpressengine/issues/867

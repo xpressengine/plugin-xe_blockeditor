@@ -11,7 +11,7 @@ const { PluginSidebar } = editPost
 const el = window.wp.element.createElement
 
 export default function () {
-  registerPlugin('laraberg-sidebar', {
+  registerPlugin('xe-blockeditor-sidebar', {
     render: () => el(Sidebar)
   })
 }
@@ -36,7 +36,7 @@ class Sidebar extends Component {
    * Get all sidebar elements and add them to the sidebar
    */
   getElements () {
-    const elements = Array.from(document.querySelectorAll(`.laraberg-sidebar *`))
+    const elements = Array.from(document.querySelectorAll(`.xe-blockeditor-sidebar *`))
     elements.forEach(this.addElement)
     this.flushRadioCache()
     this.setState({ elements: this.inputs })
@@ -88,11 +88,11 @@ class Sidebar extends Component {
       this.radioCache = []
     }
   }
-  
+
   render () {
     return (
-      <PluginSidebar name="laraberg-sidebar" icon="media-text" title="Laraberg">
-        <div className="plugin-sidebar-content laraberg-sidebar-content">
+      <PluginSidebar name="xe-blockeditor-sidebar" icon="media-text" title="xe-blockeditor">
+        <div className="plugin-sidebar-content xe-blockeditor-sidebar-content">
           {this.state.elements}
         </div>
       </PluginSidebar>

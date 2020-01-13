@@ -1,6 +1,6 @@
 import 'babel-polyfill'
 
-import './../scss/laraberg.scss'
+import '../scss/xe-blockeditor.scss'
 
 import './gutenberg/imports'
 import init from './gutenberg/init'
