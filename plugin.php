@@ -1,18 +1,18 @@
 <?php
 /**
- * Blockeditor
+ * XeBlockeditor
  *
  * PHP version 7
  *
- * @category    Blockeditor
- * @package     Xpressengine\Plugins\Blockeditor
+ * @category    XeBlockeditor
+ * @package     Xpressengine\Plugins\XeBlockeditor
  * @author      XE Developers <developers@xpressengine.com>
  * @copyright   2019 Copyright XEHub Corp. <https://www.xehub.io>
  * @license     http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL
  * @link        https://xpressengine.io
  */
 
-namespace Xpressengine\Plugins\Blockeditor;
+namespace Xpressengine\Plugins\XeBlockeditor;
 
 use Xpressengine\Permission\Grant;
 use Xpressengine\Plugin\AbstractPlugin;
@@ -25,8 +25,8 @@ use Xpressengine\User\Rating;
 /**
  * Plugin
  *
- * @category    Blockeditor
- * @package     Xpressengine\Plugins\Blockeditor
+ * @category    XeBlockeditor
+ * @package     Xpressengine\Plugins\XeBlockeditor
  * @author      XE Developers <developers@xpressengine.com>
  * @copyright   2019 Copyright XEHub Corp. <https://www.xehub.io>
  * @license     http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL
@@ -67,7 +67,7 @@ class Plugin extends AbstractPlugin
     {
         /** @var Translator $trans */
         $trans = app('xe.translator');
-        $trans->putFromLangDataSource('blockeditor', base_path('plugins/blockeditor/langs/lang.php'));
+        $trans->putFromLangDataSource('xe_blockeditor', base_path('plugins/xe_blockeditor/langs/lang.php'));
     }
 
     /**
@@ -77,7 +77,7 @@ class Plugin extends AbstractPlugin
      */
     public function boot()
     {
-//        app()->bind('xe.plugin.blockeditor', function ($app) {
+//        app()->bind('xe.plugin.xe_blockeditor', function ($app) {
 //            return $this;
 //        }, true);
     }
@@ -92,6 +92,6 @@ class Plugin extends AbstractPlugin
     {
         /** @var Translator $trans */
         $trans = app('xe.translator');
-        $trans->putFromLangDataSource('blockeditor', base_path('plugins/blockeditor/langs/lang.php'));
+        $trans->putFromLangDataSource('xe_blockeditor', base_path('plugins/xe_blockeditor/langs/lang.php'));
     }
 }

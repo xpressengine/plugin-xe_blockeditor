@@ -1,34 +1,34 @@
 <?php
 /**
- * BlockeditorPlugin
+ * XeBlockeditorPlugin
  *
  * PHP version 7
  *
- * @category    Blockeditor
- * @package     Xpressengine\Plugins\Blockeditor
+ * @category    XeBlockeditor
+ * @package     Xpressengine\Plugins\XeBlockeditor
  * @author      XE Developers <developers@xpressengine.com>
  * @copyright   2019 Copyright XEHub Corp. <https://www.xehub.io>
  * @license     http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL
  * @link        https://xpressengine.io
  */
 
-namespace Xpressengine\Plugins\Blockeditor\Extension;
+namespace Xpressengine\Plugins\XeBlockeditor\Extension;
 
 use XeFrontend;
 use Xpressengine\Plugin\AbstractComponent;
-use Xpressengine\Plugins\Blockeditor\BlockeditorPluginInterface;
+use Xpressengine\Plugins\XeBlockeditor\XeBlockeditorPluginInterface;
 
 /**
- * BlockeditorPlugin
+ * XeBlockeditorPlugin
  *
- * @category    Blockeditor
- * @package     Xpressengine\Plugins\Blockeditor
+ * @category    XeBlockeditor
+ * @package     Xpressengine\Plugins\XeBlockeditor
  * @author      XE Developers <developers@xpressengine.com>
  * @copyright   2019 Copyright XEHub Corp. <https://www.xehub.io>
  * @license     http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL
  * @link        https://xpressengine.io
  */
-class BlockeditorPlugin extends AbstractComponent implements BlockeditorPluginInterface
+class XeBlockeditorPlugin extends AbstractComponent implements XeBlockeditorPluginInterface
 {
     protected static $loaded = false;
 
