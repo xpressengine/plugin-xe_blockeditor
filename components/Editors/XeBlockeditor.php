@@ -1,38 +1,38 @@
 <?php
 /**
- * Blockeditor
+ * XeBlockeditor
  *
  * PHP version 7
  *
- * @category    Blockeditor
- * @package     Xpressengine\Plugins\Blockeditor
+ * @category    XeBlockeditor
+ * @package     Xpressengine\Plugins\XeBlockeditor
  * @author      XE Developers <developers@xpressengine.com>
  * @copyright   2019 Copyright XEHub Corp. <https://www.xehub.io>
  * @license     http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL
  * @link        https://xpressengine.io
  */
 
-namespace Xpressengine\Plugins\Blockeditor\Components\Editors;
+namespace Xpressengine\Plugins\XeBlockeditor\Components\Editors;
 
 use Illuminate\Contracts\Routing\UrlGenerator;
 use Xpressengine\Editor\AbstractEditor;
 use Route;
-use Xpressengine\Plugins\Blockeditor\plugin;
+use Xpressengine\Plugins\XeBlockeditor\plugin;
 use Xpressengine\Plugin\PluginRegister;
-use Xpressengine\Plugins\Blockeditor\BlockeditorPluginInterface;
+use Xpressengine\Plugins\XeBlockeditor\XeBlockeditorPluginInterface;
 use Illuminate\Contracts\Auth\Access\Gate;
 
 /**
- * Blockeditor
+ * XeBlockeditor
  *
- * @category    Blockeditor
- * @package     Xpressengine\Plugins\Blockeditor
+ * @category    XeBlockeditor
+ * @package     Xpressengine\Plugins\XeBlockeditor
  * @author      XE Developers <developers@xpressengine.com>
  * @copyright   2019 Copyright XEHub Corp. <https://www.xehub.io>
  * @license     http://www.gnu.org/licenses/lgpl-3.0-standalone.html LGPL
  * @link        https://xpressengine.io
  */
-class Blockeditor extends AbstractEditor
+class XeBlockeditor extends AbstractEditor
 {
     protected static $loaded = false;
 
@@ -55,7 +55,7 @@ class Blockeditor extends AbstractEditor
             })
         </script>
 DDD;
-        $content = '<div class="write_form_editor" style="width: 100vw; left: 50%; margin-left: -50vw; position: relative;">';
+        $content = '<div class="write_form_editor">';
         $content .= parent::render();
         $content .= '</div>';
         $content .= $script;
@@ -68,7 +68,7 @@ DDD;
     {
         // return $content;
 
-        /** @var BlockeditorPluginInterface $plugin */
+        /** @var XeBlockeditorPluginInterface $plugin */
         foreach ($this->getPlugins() as $plugin) {
             $content = $plugin::render($content, $scriptOnly);
         }
@@ -119,7 +119,7 @@ DDD;
             expose_route('media_library.download_file');
 
             $this->frontend->translation(array_map(function ($keyword) {
-                return 'blockeditor::' . $keyword;
+                return 'xe_blockeditor::' . $keyword;
             }, $keywords));
         }
     }
@@ -131,7 +131,7 @@ DDD;
      */
     public function getName()
     {
-        return 'XEblockeditor';
+        return 'xe_blockeditor';
     }
 
     /**
@@ -162,7 +162,7 @@ DDD;
 
     protected function compilePlugins($content)
     {
-        /** @var BlockeditorPluginInterface $plugin */
+        /** @var XeBlockeditorPluginInterface $plugin */
         foreach ($this->getPlugins() as $plugin) {
             $content = $plugin::compile($content);
         }

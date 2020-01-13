@@ -1,7 +1,7 @@
 {
-  "name": "xpressengine-plugin/blockeditor",
-  "description": "Blockeditor 에디터를 제공합니다.",
-  "keywords": ["xpressengine bundle", "XE Blockeditor"],
+  "name": "xpressengine-plugin/xe_blockeditor",
+  "description": "XeBlockeditor 에디터를 제공합니다.",
+  "keywords": ["xpressengine bundle", "XE XeBlockeditor"],
   "version": "1.0.4",
   "support": {
     "email": "developers@xpressengine.com"
@@ -10,7 +10,7 @@
     {
       "name": "XE Developers",
       "email": "developers@xpressengine.com",
-      "homepage": "https://store.xehub.io/plugins/blockeditor",
+      "homepage": "https://store.xehub.io/plugins/xe_blockeditor",
       "role": "Developer"
     }
   ],
@@ -18,12 +18,12 @@
   "type": "xpressengine-plugin",
   "extra": {
     "xpressengine": {
-      "title": "Blockeditor",
+      "title": "XeBlockeditor",
       "icon": "icon.png",
       "component": {
-        "editor/blockeditor@blockeditor": {
-          "class": "Xpressengine\\Plugins\\Blockeditor\\Components\\Editors\\Blockeditor",
-          "name": "Blockeditor",
+        "editor/xe_blockeditor@xe_blockeditor": {
+          "class": "Xpressengine\\Plugins\\XeBlockeditor\\Components\\Editors\\XeBlockeditor",
+          "name": "XeBlockeditor",
           "description": "XE 에서 사용할 기본 에디터"
         }
       }
@@ -38,8 +38,8 @@
   },
   "autoload": {
     "psr-4": {
-      "Xpressengine\\Plugins\\Blockeditor\\": "src/",
-      "Xpressengine\\Plugins\\Blockeditor\\Components\\": "components/"
+      "Xpressengine\\Plugins\\XeBlockeditor\\": "src/",
+      "Xpressengine\\Plugins\\XeBlockeditor\\Components\\": "components/"
     }
   }
 }
