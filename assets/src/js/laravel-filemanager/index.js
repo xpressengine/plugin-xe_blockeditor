@@ -43,9 +43,31 @@ export default function (config) {
     }
 
     openLFM = (type, cb) => {
-      let routePrefix = (config && config.prefix) ? config.prefix : '/laravel-filemanager'
-      window.open(routePrefix + '?type=' + type, 'FileManager', 'width=900,height=600')
-      window.SetUrl = cb
+      window.XE.app('MediaLibrary').then(function (appMediaLibrary) {
+        appMediaLibrary.open({
+          importMode: 'embed',
+          listMode: 2,
+          user: {
+            id: window.XE.config.getters['user/id'],
+            rating: window.XE.config.getters['user/rating']
+          }
+        })
+
+        appMediaLibrary.$$on('media.import', function (eventName, mediaList, options) {
+
+          // cb()
+          $.each(mediaList, function () {
+            cb(this.file.url, this.file.filename)
+            console.debug('media', this)
+          })
+        })
+      })
+
+      // 미디어 임포트 이벤트
+
+      // let routePrefix = (config && config.prefix) ? config.prefix : '/laravel-filemanager'
+      // window.open(routePrefix + '?type=' + type, 'FileManager', 'width=900,height=600')
+      // window.SetUrl = cb
     }
 
     render () {

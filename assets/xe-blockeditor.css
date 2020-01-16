@@ -12838,7 +12838,66 @@ body.block-editor-page {
   align-items: center;
   vertical-align: top; }
 
+.gutenberg__editor .block-editor-block-types-list__list-item {
+  width: 30%; }
 
+.gutenberg__editor .components-drop-zone__provider,
+.gutenberg__editor .components-navigate-regions {
+  height: auto;
+  position: static; }
+
+.gutenberg__editor .edit-post-layout__content {
+  position: static;
+  margin-left: 0;
+  min-height: calc(250px - 56px);
+  height: auto;
+  overflow-y: auto; }
+
+.gutenberg__editor .edit-post-layout {
+  height: auto;
+  position: relative;
+  top: 0;
+  left: 0; }
+
+.gutenberg__editor .edit-post-pinned-plugins {
+  display: -webkit-box;
+  display: flex; }
+
+.gutenberg__editor .edit-post-visual-editor {
+  padding-top: 25px;
+  padding-bottom: 75px;
+  height: auto; }
+
+@media (min-width: 600px) {
+  .gutenberg__editor .edit-post-header {
+    position: static;
+    top: 0; }
+  .gutenberg__editor .edit-post-layout {
+    padding-top: 0; } }
+
+.gutenberg__editor.fixed-height .components-drop-zone__provider,
+.gutenberg__editor.fixed-height .components-navigate-regions {
+  height: 100%; }
+
+.gutenberg__editor.fixed-height .edit-post-layout__content {
+  height: calc(100% - 56px); }
+
+.gutenberg__editor.fixed-height .edit-post-layout {
+  height: 100%; }
+
+.gutenberg__editor.fixed-height .editor-writing-flow {
+  height: auto; }
+
+.gutenberg__content .wp-block-columns {
+  display: -webkit-box;
+  display: flex; }
+
+.block-editor__container {
+  position: relative; }
+
+.edit-post-editor-regions {
+  position: static;
+  left: 0; }
 
 
 /*# sourceMappingURL=xe-blockeditor.css.map*/

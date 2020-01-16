@@ -49,7 +49,8 @@ class XeBlockeditor extends AbstractEditor
         <script>
             window.addEventListener('DOMContentLoaded', () => {
                 Laraberg.init('xeContentEditor', {
-                    laravelFilemanager: false,
+                    laravelFilemanager: true,
+                    sidear: true,
                     searchCb: null
                 })
             })
@@ -95,7 +96,13 @@ DDD;
                 'https://unpkg.com/react@16.8.6/umd/react.production.min.js',
                 'https://unpkg.com/react-dom@16.8.6/umd/react-dom.production.min.js',
                 plugin::asset('assets/xe-blockeditor.js')
-            ])->before('assets/core/editor/editor.bundle.js')->load();
+            ])->load();
+
+            $this->frontend->js([
+                'assets/vendor/jQuery-File-Upload/js/vendor/jquery.ui.widget.js',
+                'assets/vendor/jQuery-File-Upload/js/jquery.iframe-transport.js',
+                'assets/vendor/jQuery-File-Upload/js/jquery.fileupload.js',
+            ])->load();
 
             $this->frontend->css([
                 plugin::asset('assets/xe-blockeditor.css')
@@ -153,7 +160,7 @@ DDD;
     protected function compileBody($content)
     {
         $this->frontend->css([
-            plugin::asset('assets/laraberg.css')
+            plugin::asset('assets/xe-blockeditor.css')
         ])->load();
 
         // @deprecated `.__xe_contents_compiler` https://github.com/xpressengine/xpressengine/issues/867
