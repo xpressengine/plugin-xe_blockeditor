@@ -105,7 +105,8 @@ DDD;
             ])->load();
 
             $this->frontend->css([
-                plugin::asset('assets/xe-blockeditor.css')
+                plugin::asset('assets/xe-blockeditor.css'),
+                plugin::asset('assets/xe-blockeditor-custom.css'),
             ])->load();
 
             $lang = require realpath(__DIR__.'/../../langs') . '/lang.php';

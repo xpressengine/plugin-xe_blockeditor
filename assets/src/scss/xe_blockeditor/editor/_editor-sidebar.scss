@@ -1,0 +1,11 @@
+// 편집기 우측 사이드 메뉴 스타일
+// ul, li 기본 스타일 제거
+.components-panel__header {
+  &.edit-post-sidebar__panel-tabs {
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+  }
+}

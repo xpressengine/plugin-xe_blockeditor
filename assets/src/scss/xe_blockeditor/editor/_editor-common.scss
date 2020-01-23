@@ -1,0 +1,16 @@
+// 편집기 기본 스타일
+.xe-blockeditor__editor {
+  font-family: 'Spoqa Han Sans', sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+
+  .block-editor-block-list__block[data-type="core/paragraph"] {
+    p {
+      min-height: auto;
+      margin-top: 0;
+      margin-bottom: 1rem;
+      line-height: inherit;
+      color: blue;
+    }
+  }
+}

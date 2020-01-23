@@ -1,0 +1,156 @@
+@charset "UTF-8";
+/* webfont, font-weight: 100 은 임시 삭제 */
+@font-face {
+  font-family: 'Spoqa Han Sans';
+  font-weight: 300;
+  src: local("Spoqa Han Sans Light"), url(//cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@01ff0283e4f36e159ffbf744b36e16ef742da6d8/Subset/SpoqaHanSans/SpoqaHanSansLight.woff2) format("woff2"), url(//cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@01ff0283e4f36e159ffbf744b36e16ef742da6d8/Subset/SpoqaHanSans/SpoqaHanSansLight.woff) format("woff");
+}
+
+@font-face {
+  font-family: 'Spoqa Han Sans';
+  font-weight: 400;
+  src: local("Spoqa Han Sans Regular"), url(//cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@01ff0283e4f36e159ffbf744b36e16ef742da6d8/Subset/SpoqaHanSans/SpoqaHanSansRegular.woff2) format("woff2"), url(//cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@01ff0283e4f36e159ffbf744b36e16ef742da6d8/Subset/SpoqaHanSans/SpoqaHanSansRegular.woff) format("woff");
+}
+
+@font-face {
+  font-family: 'Spoqa Han Sans';
+  font-weight: 700;
+  src: local("Spoqa Han Sans Bold"), url(//cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@01ff0283e4f36e159ffbf744b36e16ef742da6d8/Subset/SpoqaHanSans/SpoqaHanSansBold.woff2) format("woff2"), url(//cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@01ff0283e4f36e159ffbf744b36e16ef742da6d8/Subset/SpoqaHanSans/SpoqaHanSansBold.woff) format("woff");
+}
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 300;
+  src: local("NotoSansKR-Light"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff2) format("woff2"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff) format("woff");
+}
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 400;
+  src: local("NotoSansKR-Regular"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2) format("woff2"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff) format("woff");
+}
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 500;
+  src: local("NotoSansKR-Medium"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff2) format("woff2"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff) format("woff");
+}
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 700;
+  src: local("NotoSansKR-Bold"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff2) format("woff2"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff) format("woff");
+}
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 900;
+  src: local("NotoSansKR-Black"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff2) format("woff2"), url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff) format("woff");
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  src: local("Roboto Light"), local("Roboto-Light"), url(//fonts.gstatic.com/s/roboto/v19/KFOlCnqEu92Fr1MmSU5fBBc4.woff2) format("woff2"), url(//fonts.gstatic.com/s/roboto/v19/KFOlCnqEu92Fr1MmSU5fBBc-.woff) format("woff");
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Roboto"), local("Roboto-Regular"), url(//fonts.gstatic.com/s/roboto/v19/KFOmCnqEu92Fr1Mu4mxK.woff2) format("woff2"), url(//fonts.gstatic.com/s/roboto/v19/KFOmCnqEu92Fr1Mu4mxM.woff) format("woff");
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  src: local("Roboto Medium"), local("Roboto-Medium"), url(//fonts.gstatic.com/s/roboto/v19/KFOlCnqEu92Fr1MmEU9fBBc4.woff2) format("woff2"), url(//fonts.gstatic.com/s/roboto/v19/KFOlCnqEu92Fr1MmEU9fBBc-.woff) format("woff");
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: local("Roboto Bold"), local("Roboto-Bold"), url(//fonts.gstatic.com/s/roboto/v19/KFOlCnqEu92Fr1MmWUlfBBc4.woff2) format("woff2"), url(//fonts.gstatic.com/s/roboto/v19/KFOlCnqEu92Fr1MmWUlfBBc-.woff) format("woff");
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 900;
+  src: local("Roboto Black"), local("Roboto-Black"), url(//fonts.gstatic.com/s/roboto/v19/KFOlCnqEu92Fr1MmYUtfBBc4.woff2) format("woff2"), url(//fonts.gstatic.com/s/roboto/v19/KFOlCnqEu92Fr1MmYUtfBBc-.woff) format("woff");
+}
+
+@font-face {
+  font-family: 'Avenir LT Std';
+  font-weight: 300;
+  font-style: normal;
+  src: local("Avenir LT Std 45 Book"), url("../src/fonts/AvenirLTStd/AvenirLTStd-Book.woff2") format("woff2"), url("../src/fonts/AvenirLTStd/AvenirLTStd-Book.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Avenir LT Std';
+  font-weight: 400;
+  font-style: normal;
+  src: local("Avenir LT Std 55 Roman"), url("../src/fonts/AvenirLTStd/AvenirLTStd-Roman.woff2") format("woff2"), url("../src/fonts/AvenirLTStd/AvenirLTStd-Roman.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Avenir LT Std';
+  font-weight: 500;
+  font-style: normal;
+  src: local("Avenir LT Std 65 Medium"), url("../src/fonts/AvenirLTStd/AvenirLTStd-Medium.woff2") format("woff2"), url("../src/fonts/AvenirLTStd/AvenirLTStd-Medium.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Avenir LT Std';
+  font-weight: 700;
+  font-style: normal;
+  src: local("Avenir LT Std 85 Heavy"), url("../src/fonts/AvenirLTStd/AvenirLTStd-Heavy.woff2") format("woff2"), url("../src/fonts/AvenirLTStd/AvenirLTStd-Heavy.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Avenir LT Std';
+  font-weight: 900;
+  font-style: normal;
+  src: local("Avenir LT Std 95 Black"), url("../src/fonts/AvenirLTStd/AvenirLTStd-Black.woff2") format("woff2"), url("../src/fonts/AvenirLTStd/AvenirLTStd-Black.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'LarishAlte-Semibold';
+  font-weight: 200;
+  src: url("../src/fonts/LarishAlte/LarishAlte-Semibold.woff2") format("woff2"), url("../src/fonts/LarishAlte/LarishAlte-Semibold.woff") format("woff");
+}
+
+.xe-blockeditor__editor {
+  font-family: 'Spoqa Han Sans', sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.xe-blockeditor__editor .block-editor-block-list__block[data-type="core/paragraph"] p {
+  min-height: auto;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  line-height: inherit;
+  color: blue;
+}
+
+.components-panel__header.edit-post-sidebar__panel-tabs ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gutenberg__content p {
+  color: red;
+}
+
+/*# sourceMappingURL=xe-blockeditor-custom.css.map */
