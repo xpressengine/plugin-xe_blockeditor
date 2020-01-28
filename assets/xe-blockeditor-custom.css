@@ -140,17 +140,12 @@
   margin-top: 0;
   margin-bottom: 1rem;
   line-height: inherit;
-  color: blue;
 }
 
 .components-panel__header.edit-post-sidebar__panel-tabs ul {
   margin: 0;
   padding: 0;
   list-style: none;
-}
-
-.gutenberg__content p {
-  color: red;
 }
 
 /*# sourceMappingURL=xe-blockeditor-custom.css.map */
