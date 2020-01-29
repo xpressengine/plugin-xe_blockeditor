@@ -3,4 +3,25 @@
   p {
     // color: red;
   }
+
+  // 컬럼 스타일
+  .wp-block-column {
+    flex-basis: 100%;
+    flex-grow: 1;
+    margin: 0;
+  }
+}
+
+@include tablets {
+  .wp-block-columns {
+    flex-wrap: nowrap;
+  }
+
+  .wp-block-column:not(:first-child) {
+    margin-left: 12px;
+  }
+}
+
+@include pc {
+
 }
