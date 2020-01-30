@@ -1,0 +1,121 @@
+// 커스텀 블럭 스타일
+.gutenberg__content,
+.xe-blockeditor__editor {
+  // 리드문
+  .block-editor__text-lead {
+    position: relative;
+    margin-bottom: 40px;
+    padding-top: 26px;
+    font-family: 'Nanum Myeongjo', sans-serif;
+    font-size: 18px;
+    line-height: 1.78;
+    color: #9f845b;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 2px;
+      width: 6px;
+      height: 6px;
+      border-radius: 2px;
+      transform: rotate(45deg);
+      background-color: #9f845b;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 14px;
+      width: 6px;
+      height: 6px;
+      border-radius: 2px;
+      transform: rotate(45deg);
+      background-color: #9f845b;
+    }
+  }
+
+  // 인용문
+  .block-editor__text-quote {
+    padding-left: 18px;
+    border-left: 2px solid #a48355;
+    font-size: 18px;
+    line-height: 1.44;
+    letter-spacing: -0.0277em;
+    color: #a48355;
+  }
+
+  // hr
+  .wp-block-separator {
+    &.block-editor__text-separator {
+      max-width: 100%;
+      margin-top: 100px;
+      margin-bottom: 100px;
+      border-color: #d8d8d8;
+    }
+  }
+}
+
+// 편집모드 스타일 추가 덮기
+.xe-blockeditor__editor {
+  .block-editor-block-list__block[data-type="core/paragraph"] {
+    .block-editor__text-lead {
+      margin-bottom: 40px;
+      padding-top: 26px;
+      font-size: 18px;
+      line-height: 1.78;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+
+}
+
+@media (min-width: 992px) {
+  .gutenberg__content,
+  .xe-blockeditor__editor {
+    // 리드문
+    .block-editor__text-lead {
+      margin-bottom: 60px;
+      font-size: 28px;
+      line-height: 1.57;
+    }
+
+    // 문단 좌우 간격
+    .block-editor__text-indent {
+      margin-left: 8.33333%;
+      margin-right: 8.33333%;
+    }
+
+    // 인용문
+    .block-editor__text-quote {
+      padding-left: 24px;
+      font-size: 30px;
+      line-height: 1.6;
+      letter-spacing: -0.0333em;
+      color: #a48355;
+
+      &.block-editor__text-indent {
+        margin-left: calc(8.33333% - 26px);
+      }
+    }
+
+    // hr
+    .block-editor__text-separator {
+
+    }
+  }
+
+  // 편집모드 스타일 추가 덮기
+  .xe-blockeditor__editor {
+    .block-editor-block-list__block[data-type="core/paragraph"] {
+      .block-editor__text-lead {
+        margin-bottom: 60px;
+        font-size: 28px;
+        line-height: 1.57;
+      }
+    }
+  }
+}

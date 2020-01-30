@@ -1,7 +1,13 @@
 // 편집기(에디터 스타일)
+@import 'https://fonts.googleapis.com/earlyaccess/nanummyeongjo.css'; // 나눔명조 웹 폰트
 
 @import 'editor/editor-common'; // 편집기 기본 스타일
 @import 'editor/editor-sidebar'; // 편집기 우측 사이드 메뉴 스타일
+// 블럭 스타일
+@import 'editor/editor-paragraph-block'; // paragraph 블럭
+@import 'editor/editor-column-block'; // column 블럭
+@import 'editor/editor-image-block'; // image 블럭
+@import 'editor/editor-heading-block'; // heading 블럭
 
 .block-editor-block-list__layout {
   .block-editor-block-list__block {
@@ -31,3 +37,20 @@
 }
 
 
+.xe-blockeditor__editor {
+  // 모바일에서 좌우 간격
+  .block-editor-block-list__layout {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (min-width: 768px) {
+  .xe-blockeditor__editor {
+
+  }
+}
+
+@media (min-width: 992px) {
+
+}

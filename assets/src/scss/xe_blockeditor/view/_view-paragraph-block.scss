@@ -1,0 +1,24 @@
+// paragraph 블럭 스타일
+.gutenberg__content {
+  // --- 텍스트 링크 스타일 ---
+  p {
+    a {
+      text-decoration: underline;
+      color: #ff4300;
+
+      &:hover {
+        color: #ff4300;
+        text-decoration: underline;
+      }
+    }
+  }
+  // --- //텍스트 링크 스타일 ---
+}
+
+@media (min-width: 768px) {
+
+}
+
+@media (min-width: 992px) {
+
+}

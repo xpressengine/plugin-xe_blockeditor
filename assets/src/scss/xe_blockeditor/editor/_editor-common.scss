@@ -1,16 +1,35 @@
 // 편집기 기본 스타일
 .xe-blockeditor__editor {
-  font-family: 'Spoqa Han Sans', sans-serif;
-  font-size: 14px;
-  line-height: 20px;
+  .edit-post-editor-regions__content {
+    font-family: 'Spoqa Han Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  a, div {
+    outline: none;
+  }
 
   .block-editor-block-list__block[data-type="core/paragraph"] {
     p {
       min-height: auto;
       margin-top: 0;
-      margin-bottom: 1rem;
+      margin-bottom: 28px;
       line-height: inherit;
-      // color: blue;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+
+}
+
+@media (min-width: 992px) {
+  // 편집기 기본 스타일
+  .xe-blockeditor__editor {
+    .edit-post-editor-regions__content {
+      font-size: 18px;
+      line-height: 2;
     }
   }
 }

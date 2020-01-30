@@ -1,0 +1,72 @@
+// heading 블럭 스타일
+.xe-blockeditor__editor {
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 500;
+  }
+
+  h1 {
+
+  }
+
+  h2 {
+    margin-bottom: 40px;
+    font-size: 18px;
+    line-height: 1.44;
+    letter-spacing: -0.0277em;
+  }
+
+  h3 {
+    margin-bottom: 20px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  h4 {
+
+  }
+
+  h5 {
+
+  }
+
+  h6 {
+
+  }
+}
+
+@media (min-width: 768px) {
+  .xe-blockeditor__editor {
+    h1 {
+
+    }
+
+    h2 {
+      margin-bottom: 60px;
+      font-size: 24px;
+      line-height: 1.5;
+      letter-spacing: -0.0208em;
+    }
+
+    h3 {
+      margin-bottom: 30px;
+      font-size: 18px;
+      line-height: 1.78;
+    }
+
+    h4 {
+
+    }
+
+    h5 {
+
+    }
+
+    h6 {
+
+    }
+  }
+}
+
+@media (min-width: 992px) {
+
+}

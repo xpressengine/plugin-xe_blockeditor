@@ -1,0 +1,64 @@
+// column 블럭
+.xe-blockeditor__editor {
+  // --- 컬럼 ---
+  .wp-block-columns {
+    flex-wrap: wrap;
+
+    > .block-editor-inner-blocks {
+      > .block-editor-block-list__layout {
+        > [data-type="core/column"] {
+          flex-basis: 100%;
+          margin-left: 0;
+          margin-right: 0;
+        }
+      }
+    }
+
+    // 내부 컬럼 내 padding 제거
+    .block-editor-inner-blocks {
+      > .block-editor-block-list__layout {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+
+    .wp-block-column {
+      &:last-child {
+        .wp-block-image {
+          margin-bottom: 12px;
+        }
+      }
+    }
+  }
+  // --- //컬럼 ---
+}
+
+@media (min-width: 768px) {
+
+}
+
+@media (min-width: 992px) {
+  .xe-blockeditor__editor {
+    // --- 컬럼 ---
+    .wp-block-columns {
+      flex-wrap: nowrap;
+
+      > .block-editor-inner-blocks {
+        > .block-editor-block-list__layout {
+          > [data-type="core/column"] {
+            flex-basis: calc(50% - (12px));
+          }
+
+          > [data-type="core/column"]:not(:first-child) {
+            margin-left: 12px;
+          }
+        }
+      }
+
+      .wp-block-image {
+        margin-bottom: 32px;
+      }
+    }
+    // --- //컬럼 ---
+  }
+}

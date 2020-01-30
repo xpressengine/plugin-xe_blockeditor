@@ -1,0 +1,26 @@
+// paragraph 블럭 스타일
+.xe-blockeditor__editor {
+  // --- 텍스트 링크 스타일 ---
+  .block-editor-rich-text__editable {
+    a {
+      text-decoration: underline;
+      color: #ff4300;
+
+      &:hover {
+        text-decoration: underline;
+        color: #ff4300;
+      }
+    }
+  }
+  // --- //텍스트 링크 스타일 ---
+}
+
+@media (min-width: 768px) {
+  .xe-blockeditor__editor {
+
+  }
+}
+
+@media (min-width: 992px) {
+
+}

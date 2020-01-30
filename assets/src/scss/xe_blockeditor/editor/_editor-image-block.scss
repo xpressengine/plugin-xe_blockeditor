@@ -1,0 +1,32 @@
+// Image 블럭 스타일
+.xe-blockeditor__editor {
+  .wp-block-image {
+    margin-bottom: 40px;
+
+    figcaption {
+      font-size: 11px;
+      line-height: 1.45;
+      color: #989898;
+    }
+  }
+}
+
+
+@media (min-width: 768px) {
+  .xe-blockeditor__editor {
+
+  }
+}
+
+@media (min-width: 992px) {
+  .xe-blockeditor__editor {
+    .wp-block-image {
+      margin-bottom: 60px;
+
+      figcaption {
+        font-size: 14px;
+        line-height: 1.43;
+      }
+    }
+  }
+}

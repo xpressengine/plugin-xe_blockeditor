@@ -1,0 +1,26 @@
+// 뷰 기본 스타일
+.gutenberg__content {
+  .xe-content-xe_blog {
+    font-family: 'Spoqa Han Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  p {
+    margin-bottom: 28px;
+  }
+}
+
+@media (min-width: 768px) {
+
+}
+
+@media (min-width: 992px) {
+  // 뷰 기본 스타일
+  .gutenberg__content {
+    .xe-content-xe_blog {
+      font-size: 18px;
+      line-height: 2;
+    }
+  }
+}

@@ -1,27 +1,17 @@
 // 뷰페이지 스타일
-.gutenberg__content {
-  p {
-    // color: red;
-  }
+@import 'view/view-common'; // 뷰 기본 스타일
+// 블럭 스타일
+@import 'view/view-paragraph-block'; // 뷰 paragraph 블럭
+@import 'view/view-column-block'; // 뷰 column 블럭
+@import 'view/view-image-block'; // 뷰 image 블럭
+@import 'view/view-heading-block'; // 뷰 heading 블럭
 
-  // 컬럼 스타일
-  .wp-block-column {
-    flex-basis: 100%;
-    flex-grow: 1;
-    margin: 0;
-  }
+
+
+@media (min-width: 768px) {
+
 }
 
-@include tablets {
-  .wp-block-columns {
-    flex-wrap: nowrap;
-  }
-
-  .wp-block-column:not(:first-child) {
-    margin-left: 12px;
-  }
-}
-
-@include pc {
+@media (min-width: 992px) {
 
 }

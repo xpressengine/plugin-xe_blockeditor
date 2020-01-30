@@ -1,0 +1,48 @@
+// column 스타일
+.gutenberg__content {
+  .wp-block-columns {
+    flex-wrap: wrap;
+
+    .wp-block-column {
+      &:last-child {
+        .wp-block-image {
+          margin-bottom: 12px;
+        }
+      }
+    }
+  }
+
+  .wp-block-column {
+    flex-basis: 100%;
+    flex-grow: 1;
+    margin: 0;
+  }
+}
+
+@media (min-width: 768px) {
+
+}
+
+@media (min-width: 992px) {
+  .gutenberg__content {
+    .wp-block-columns {
+      flex-wrap: nowrap;
+
+      .wp-block-column {
+        .wp-block-image {
+          margin-bottom: 32px;
+        }
+
+        &:last-child {
+          .wp-block-image {
+            margin-bottom: 32px;
+          }
+        }
+      }
+    }
+
+    .wp-block-column:not(:first-child) {
+      margin-left: 12px;
+    }
+  }
+}
