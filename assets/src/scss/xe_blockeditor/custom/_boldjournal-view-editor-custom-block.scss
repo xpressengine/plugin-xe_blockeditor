@@ -1,8 +1,9 @@
 // 커스텀 블럭 스타일
-.gutenberg__content,
+.theme-boldjournal .gutenberg__content,
 .xe-blockeditor__editor {
   // 리드문
-  .is-style-block-editor__text-lead {
+  .is-style-boldjournal__text-lead,
+  .is-style-boldjournal__text-lead--indent {
     position: relative;
     margin-bottom: 40px;
     padding-top: 26px;
@@ -37,7 +38,9 @@
   }
 
   // 인용문
-  .is-style-block-editor__text-quote {
+
+  .is-style-boldjournal__text-quote,
+  .is-style-boldjournal__text-quote--indent {
     padding-left: 18px;
     border-left: 2px solid #a48355;
     font-size: 18px;
@@ -48,7 +51,8 @@
 
   // hr
   .wp-block-separator {
-    &.is-style-block-editor__text-separator {
+    &.is-style-boldjournal__text-separator,
+    &.is-style-boldjournal__text-separator--indent {
       max-width: 100%;
       margin-top: 100px;
       margin-bottom: 100px;
@@ -56,7 +60,9 @@
     }
   }
 
-  .is-style-block-editor__text-type--subtitle {
+  // 서브타이틀
+  .is-style-boldjournal__text-type--subtitle,
+  .is-style-boldjournal__text-type--subtitle-indent {
     em {
       font-family: 'LarishAlte-Semibold', sans-serif;
       font-style: normal;
@@ -69,7 +75,8 @@
   }
 
   .wp-block-group {
-    &.is-style-block-editor__group-type--tip {
+    &.is-style-boldjournal__group-type--tip,
+    &.is-style-boldjournal__group-type--tip-indent {
       padding: 40px 40px 12px;
 
       p {
@@ -82,7 +89,8 @@
 // 편집모드 스타일 추가 덮기
 .xe-blockeditor__editor {
   .block-editor-block-list__block[data-type="core/paragraph"] {
-    .is-style-block-editor__text-lead {
+    .is-style-boldjournal__text-lead,
+    .is-style-boldjournal__text-lead--indent {
       margin-bottom: 40px;
       padding-top: 26px;
       font-size: 18px;
@@ -91,7 +99,8 @@
   }
 
   .wp-block-group {
-    &.is-style-block-editor__group-type--tip {
+    &.is-style-boldjournal__group-type--tip,
+    &.is-style-boldjournal__group-type--tip-indent {
       padding: 40px 18px;
     }
   }
@@ -102,44 +111,76 @@
 }
 
 @media (min-width: 992px) {
-  .gutenberg__content,
+  .theme-boldjournal .gutenberg__content,
   .xe-blockeditor__editor {
     // 리드문
-    .is-style-block-editor__text-lead {
+    .is-style-boldjournal__text-lead {
+      margin-bottom: 60px;
+      font-size: 28px;
+      line-height: 1.57;
+    }
+
+    .is-style-boldjournal__text-lead--indent {
+      margin-left: 8.33333%;
+      margin-right: 8.33333%;
       margin-bottom: 60px;
       font-size: 28px;
       line-height: 1.57;
     }
 
     // 문단 좌우 간격
-    .is-style-block-editor__text-indent {
+    .is-style-boldjournal__text-indent {
       margin-left: 8.33333%;
       margin-right: 8.33333%;
     }
 
     // 인용문
-    .is-style-block-editor__text-quote {
+    .is-style-boldjournal__text-quote {
+      margin-left: -26px;
       padding-left: 24px;
       font-size: 30px;
       line-height: 1.6;
       letter-spacing: -0.0333em;
       color: #a48355;
+    }
 
-      &.block-editor__text-indent {
-        margin-left: calc(8.33333% - 26px);
-      }
+    .is-style-boldjournal__text-quote--indent {
+      margin-left: calc(8.33333% - 26px);
+      padding-left: 24px;
+      font-size: 30px;
+      line-height: 1.6;
+      letter-spacing: -0.0333em;
+      color: #a48355;
     }
 
     // hr
-    .is-style-block-editor__text-separator {
+    .wp-block-separator {
+      &.is-style-boldjournal__text-separator--indent {
+        margin-left: 8.33333%;
+        margin-right: 8.33333%;
+      }
+    }
 
+    // 서브 타이틀
+
+    .is-style-boldjournal__text-type--subtitle-indent {
+      margin-left: 8.33333%;
+      margin-right: 8.33333%;
     }
   }
 
   // 편집모드 스타일 추가 덮기
   .xe-blockeditor__editor {
     .block-editor-block-list__block[data-type="core/paragraph"] {
-      .is-style-block-editor__text-lead {
+      .is-style-boldjournal__text-lead {
+        margin-bottom: 60px;
+        font-size: 28px;
+        line-height: 1.57;
+      }
+
+      .is-style-boldjournal__text-lead--indent {
+        margin-left: 8.33333%;
+        margin-right: 8.33333%;
         margin-bottom: 60px;
         font-size: 28px;
         line-height: 1.57;
