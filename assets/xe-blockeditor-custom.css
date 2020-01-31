@@ -127,7 +127,7 @@
 @font-face {
   font-family: 'LarishAlte-Semibold';
   font-weight: 200;
-  src: url("../src/fonts/LarishAlte/LarishAlte-Semibold.woff2") format("woff2"), url("../src/fonts/LarishAlte/LarishAlte-Semibold.woff") format("woff");
+  src: url("src/fonts/LarishAlte/LarishAlte-Semibold.woff2") format("woff2"), url("src/fonts/LarishAlte/LarishAlte-Semibold.woff") format("woff");
 }
 
 .xe-blockeditor__editor .edit-post-editor-regions__content {
@@ -145,6 +145,7 @@
   margin-top: 0;
   margin-bottom: 28px;
   line-height: inherit;
+  font-weight: 300;
 }
 
 @media (min-width: 992px) {
@@ -293,6 +294,7 @@
 
 .gutenberg__content p {
   margin-bottom: 28px;
+  font-weight: 300;
 }
 
 @media (min-width: 992px) {
@@ -454,11 +456,36 @@
   border-color: #d8d8d8;
 }
 
+.gutenberg__content .block-editor__text-type--subtitle em,
+.xe-blockeditor__editor .block-editor__text-type--subtitle em {
+  font-family: 'LarishAlte-Semibold', sans-serif;
+  font-style: normal;
+  font-size: 0.8em;
+  font-weight: 400;
+  line-height: 1;
+  vertical-align: 0.2em;
+  color: #989898;
+}
+
+.gutenberg__content .wp-block-group.block-editor__group-type--tip,
+.xe-blockeditor__editor .wp-block-group.block-editor__group-type--tip {
+  padding: 40px 40px 12px;
+}
+
+.gutenberg__content .wp-block-group.block-editor__group-type--tip p,
+.xe-blockeditor__editor .wp-block-group.block-editor__group-type--tip p {
+  color: #989898;
+}
+
 .xe-blockeditor__editor .block-editor-block-list__block[data-type="core/paragraph"] .block-editor__text-lead {
   margin-bottom: 40px;
   padding-top: 26px;
   font-size: 18px;
   line-height: 1.78;
+}
+
+.xe-blockeditor__editor .wp-block-group.block-editor__group-type--tip {
+  padding: 40px 18px;
 }
 
 @media (min-width: 992px) {
