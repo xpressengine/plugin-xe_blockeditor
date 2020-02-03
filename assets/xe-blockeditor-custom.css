@@ -601,6 +601,7 @@
 .theme-boldjournal .gutenberg__content .wp-block-group.is-style-boldjournal__group-type--tip, .theme-boldjournal .gutenberg__content .wp-block-group.is-style-boldjournal__group-type--tip-indent,
 .xe-blockeditor__editor .wp-block-group.is-style-boldjournal__group-type--tip,
 .xe-blockeditor__editor .wp-block-group.is-style-boldjournal__group-type--tip-indent {
+  margin-bottom: 28px;
   padding: 40px 40px 12px;
 }
 
