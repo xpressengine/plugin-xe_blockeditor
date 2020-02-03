@@ -670,6 +670,11 @@
     margin-left: 8.33333%;
     margin-right: 8.33333%;
   }
+  .theme-boldjournal .gutenberg__content .wp-block-group.is-style-boldjournal__group-type--tip-indent,
+  .xe-blockeditor__editor .wp-block-group.is-style-boldjournal__group-type--tip-indent {
+    margin-left: 8.3333%;
+    margin-right: 8.3333%;
+  }
   .xe-blockeditor__editor .block-editor-block-list__block[data-type="core/paragraph"] .is-style-boldjournal__text-lead {
     margin-bottom: 60px;
     font-size: 28px;

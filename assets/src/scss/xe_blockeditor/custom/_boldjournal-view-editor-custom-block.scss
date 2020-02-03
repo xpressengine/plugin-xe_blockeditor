@@ -167,6 +167,13 @@
       margin-left: 8.33333%;
       margin-right: 8.33333%;
     }
+
+    .wp-block-group {
+      &.is-style-boldjournal__group-type--tip-indent {
+        margin-left: 8.3333%;
+        margin-right: 8.3333%;
+      }
+    }
   }
 
   // 편집모드 스타일 추가 덮기
