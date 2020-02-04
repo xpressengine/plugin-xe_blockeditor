@@ -580,6 +580,50 @@
   color: #a48355;
 }
 
+.theme-boldjournal .gutenberg__content .is-style-boldjournal__text-quote--writer,
+.theme-boldjournal .gutenberg__content .is-style-boldjournal__text-quote--writer-indent,
+.xe-blockeditor__editor .is-style-boldjournal__text-quote--writer,
+.xe-blockeditor__editor .is-style-boldjournal__text-quote--writer-indent {
+  position: relative;
+  margin-top: 40px;
+  padding: 10px 0 0 0;
+  border-left: 0 none;
+  font-size: 16px;
+  line-height: 1.75;
+  letter-spacing: 0;
+  color: #000;
+}
+
+.theme-boldjournal .gutenberg__content .is-style-boldjournal__text-quote--writer:before,
+.theme-boldjournal .gutenberg__content .is-style-boldjournal__text-quote--writer-indent:before,
+.xe-blockeditor__editor .is-style-boldjournal__text-quote--writer:before,
+.xe-blockeditor__editor .is-style-boldjournal__text-quote--writer-indent:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 4px;
+  background-color: #181307;
+}
+
+.theme-boldjournal .gutenberg__content .is-style-boldjournal__text-quote--writer p,
+.theme-boldjournal .gutenberg__content .is-style-boldjournal__text-quote--writer-indent p,
+.xe-blockeditor__editor .is-style-boldjournal__text-quote--writer p,
+.xe-blockeditor__editor .is-style-boldjournal__text-quote--writer-indent p {
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.theme-boldjournal .gutenberg__content .is-style-boldjournal__text-quote--writer cite,
+.theme-boldjournal .gutenberg__content .is-style-boldjournal__text-quote--writer-indent cite,
+.xe-blockeditor__editor .is-style-boldjournal__text-quote--writer cite,
+.xe-blockeditor__editor .is-style-boldjournal__text-quote--writer-indent cite {
+  font-size: 14px;
+  line-height: 1.71;
+  color: #666;
+}
+
 .theme-boldjournal .gutenberg__content .wp-block-separator.is-style-boldjournal__text-separator, .theme-boldjournal .gutenberg__content .wp-block-separator.is-style-boldjournal__text-separator--indent,
 .xe-blockeditor__editor .wp-block-separator.is-style-boldjournal__text-separator,
 .xe-blockeditor__editor .wp-block-separator.is-style-boldjournal__text-separator--indent {
@@ -627,6 +671,14 @@
   padding: 40px 18px;
 }
 
+.xe-blockeditor__editor .is-style-boldjournal__text-quote--writer .wp-block-quote__citation,
+.xe-blockeditor__editor .is-style-boldjournal__text-quote--writer-indent .wp-block-quote__citation {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.71;
+  color: #666;
+}
+
 @media (min-width: 992px) {
   .theme-boldjournal .gutenberg__content .is-style-boldjournal__text-lead,
   .xe-blockeditor__editor .is-style-boldjournal__text-lead {
@@ -665,6 +717,49 @@
     letter-spacing: -0.0333em;
     color: #a48355;
   }
+  .theme-boldjournal .gutenberg__content .is-style-boldjournal__text-quote--writer,
+  .theme-boldjournal .gutenberg__content .is-style-boldjournal__text-quote--writer-indent,
+  .xe-blockeditor__editor .is-style-boldjournal__text-quote--writer,
+  .xe-blockeditor__editor .is-style-boldjournal__text-quote--writer-indent {
+    position: relative;
+    margin-top: 56px;
+    padding: 30px 0 0 0;
+    border-left: 0 none;
+    font-size: 18px;
+    line-height: 1.78;
+    letter-spacing: 0;
+    color: #000;
+  }
+  .theme-boldjournal .gutenberg__content .is-style-boldjournal__text-quote--writer:before,
+  .theme-boldjournal .gutenberg__content .is-style-boldjournal__text-quote--writer-indent:before,
+  .xe-blockeditor__editor .is-style-boldjournal__text-quote--writer:before,
+  .xe-blockeditor__editor .is-style-boldjournal__text-quote--writer-indent:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 164px;
+    height: 4px;
+    background-color: #181307;
+  }
+  .theme-boldjournal .gutenberg__content .is-style-boldjournal__text-quote--writer p,
+  .theme-boldjournal .gutenberg__content .is-style-boldjournal__text-quote--writer-indent p,
+  .xe-blockeditor__editor .is-style-boldjournal__text-quote--writer p,
+  .xe-blockeditor__editor .is-style-boldjournal__text-quote--writer-indent p {
+    margin-bottom: 16px;
+  }
+  .theme-boldjournal .gutenberg__content .is-style-boldjournal__text-quote--writer cite,
+  .theme-boldjournal .gutenberg__content .is-style-boldjournal__text-quote--writer-indent cite,
+  .xe-blockeditor__editor .is-style-boldjournal__text-quote--writer cite,
+  .xe-blockeditor__editor .is-style-boldjournal__text-quote--writer-indent cite {
+    font-size: 16px;
+    line-height: 1.88;
+  }
+  .theme-boldjournal .gutenberg__content .is-style-boldjournal__text-quote--writer-indent,
+  .xe-blockeditor__editor .is-style-boldjournal__text-quote--writer-indent {
+    margin-left: 8.33333%;
+    margin-right: 8.33333%;
+  }
   .theme-boldjournal .gutenberg__content .wp-block-separator.is-style-boldjournal__text-separator--indent,
   .xe-blockeditor__editor .wp-block-separator.is-style-boldjournal__text-separator--indent {
     margin-left: 8.33333%;
@@ -691,6 +786,11 @@
     margin-bottom: 60px;
     font-size: 28px;
     line-height: 1.57;
+  }
+  .xe-blockeditor__editor .is-style-boldjournal__text-quote--writer .wp-block-quote__citation,
+  .xe-blockeditor__editor .is-style-boldjournal__text-quote--writer-indent .wp-block-quote__citation {
+    font-size: 16px;
+    line-height: 1.88;
   }
 }
 
