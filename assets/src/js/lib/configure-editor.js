@@ -138,7 +138,7 @@ function setupSubmit (target) {
  * Removes the default upload button from media blocks
  */
 function removeUploadButton () {
-  // elementRendered('.components-form-file-upload button', element => element.remove())
+  elementRendered('.components-form-file-upload button', element => element.remove())
 }
 
 /**
@@ -146,16 +146,16 @@ function removeUploadButton () {
  */
 function removeElements () {
   // Manage All Reusable blocks
-  // elementRendered('[href="edit.php?post_type=wp_block"]', element => { element.remove() })
+  elementRendered('[href="edit.php?post_type=wp_block"]', element => { element.remove() })
 
   // Publish button
-  // elementRendered('.editor-post-publish-button', element => { element.style.display = 'none' })
-  // elementRendered('.editor-post-publish-panel__toggle', element => { element.style.display = 'none' })
+  elementRendered('.editor-post-publish-button', element => { element.style.display = 'none' })
+  elementRendered('.editor-post-publish-panel__toggle', element => { element.style.display = 'none' })
 
   // Remove article button
-  // elementRendered('.editor-post-trash', element => { element.remove() })
+  elementRendered('.editor-post-trash', element => { element.remove() })
 
-  // elementRendered('.editor-post-saved-state', element => { element.style.display = 'none' })
+  elementRendered('.editor-post-saved-state', element => { element.style.display = 'none' })
 
-  // elementRendered('.components-popover__content div .components-menu-group:last-of-type', element => { element.style.display = 'none' })
+  elementRendered('.components-popover__content div .components-menu-group:last-of-type', element => { element.style.display = 'none' })
 }
