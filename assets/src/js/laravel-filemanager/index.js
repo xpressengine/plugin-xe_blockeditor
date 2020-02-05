@@ -58,7 +58,6 @@ export default function (config) {
           // cb()
           $.each(mediaList, function () {
             cb(this.file.url, this.file.filename)
-            console.debug('media', this)
           })
         })
       })

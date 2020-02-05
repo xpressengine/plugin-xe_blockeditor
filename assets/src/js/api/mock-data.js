@@ -35,8 +35,10 @@ export const page = {
   permalink_template: `${window.location.origin}/preview`,
   preview_link: `${window.location.origin}/preview`,
   _links: {
-    'wp:action-assign-categories': [],
-    'wp:action-create-categories': []
+    // 'wp:action-assign-categories': [],
+    // 'wp:action-create-categories': [],
+    // 'wp:action-publish': [],
+    // 'wp:action-sticky': []
   },
   // functions
   setContent: (content) => {
@@ -104,20 +106,28 @@ export const types = {
 }
 
 export const user = {
-  id: 1,
-  name: 'Laraberg',
-  url: '',
-  description: '',
-  link: 'https://demo.wp-api.org/author/laraberg/',
-  slug: 'laraberg',
-  avatar_urls: {
-    24: 'http://2.gravatar.com/avatar/83888eb8aea456e4322577f96b4dbaab?s=24&d=mm&r=g',
-    48: 'http://2.gravatar.com/avatar/83888eb8aea456e4322577f96b4dbaab?s=48&d=mm&r=g',
-    96: 'http://2.gravatar.com/avatar/83888eb8aea456e4322577f96b4dbaab?s=96&d=mm&r=g'
+  "id": 1,
+  "name": "bnu",
+  "url": "",
+  "description": "",
+  "link": "http://wp.bnu.udd.kr/author/bnu/",
+  "slug": "bnu",
+  "avatar_urls": {
+      "24": "http://2.gravatar.com/avatar/89faf515298da5d0c7177f81e0376b06?s=24&d=mm&r=g",
+      "48": "http://2.gravatar.com/avatar/89faf515298da5d0c7177f81e0376b06?s=48&d=mm&r=g",
+      "96": "http://2.gravatar.com/avatar/89faf515298da5d0c7177f81e0376b06?s=96&d=mm&r=g"
   },
-  meta: [],
-  _links: {
-    self: [],
-    collection: []
+  "meta": [],
+  "_links": {
+      "self": [
+          {
+              "href": "http://wp.bnu.udd.kr/wp-json/wp/v2/users/1"
+          }
+      ],
+      "collection": [
+          {
+              "href": "http://wp.bnu.udd.kr/wp-json/wp/v2/users"
+          }
+      ]
   }
 }

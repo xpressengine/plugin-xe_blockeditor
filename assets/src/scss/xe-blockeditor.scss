@@ -14,10 +14,14 @@
 @import "./wordpress-overrides.scss";
 
 .block-editor__container {
-  position: relative;
+  // position: relative;
 }
 
 .edit-post-editor-regions {
-  position: static;
+  // position: static;
   left: 0;
+}
+
+.write_form_editor {
+  min-height: calc(100vh - 56px);
 }

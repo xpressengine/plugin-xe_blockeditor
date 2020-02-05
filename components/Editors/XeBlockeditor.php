@@ -161,7 +161,8 @@ DDD;
     protected function compileBody($content)
     {
         $this->frontend->css([
-            plugin::asset('assets/xe-blockeditor.css')
+            plugin::asset('assets/xe-blockeditor.css'),
+            plugin::asset('assets/xe-blockeditor-custom.css')
         ])->load();
 
         // @deprecated `.__xe_contents_compiler` https://github.com/xpressengine/xpressengine/issues/867

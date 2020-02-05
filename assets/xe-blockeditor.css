@@ -12861,6 +12861,7 @@ body.block-editor-page {
 
 .gutenberg__editor .edit-post-pinned-plugins {
   display: -webkit-box;
+  display: -ms-flexbox;
   display: flex; }
 
 .gutenberg__editor .edit-post-visual-editor {
@@ -12890,14 +12891,14 @@ body.block-editor-page {
 
 .gutenberg__content .wp-block-columns {
   display: -webkit-box;
+  display: -ms-flexbox;
   display: flex; }
 
-.block-editor__container {
-  position: relative; }
-
 .edit-post-editor-regions {
-  position: static;
   left: 0; }
+
+.write_form_editor {
+  min-height: calc(100vh - 56px); }
 
 
 /*# sourceMappingURL=xe-blockeditor.css.map*/

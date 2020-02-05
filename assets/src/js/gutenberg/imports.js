@@ -22,7 +22,6 @@ import * as coreData from 'gutenberg/packages/core-data'
 import * as date from 'gutenberg/packages/date'
 import deprecated from 'gutenberg/packages/deprecated'
 import * as notices from 'gutenberg/packages/notices'
-import * as nux from 'gutenberg/packages/nux'
 import * as tokenList from 'gutenberg/packages/token-list'
 import * as viewport from 'gutenberg/packages/viewport'
 import * as wordcount from 'gutenberg/packages/wordcount'
@@ -36,7 +35,7 @@ import * as blockEditor from 'gutenberg/packages/block-editor'
 import * as annotations from 'gutenberg/packages/annotations'
 import * as blockSerializationSpecParser from 'gutenberg/packages/block-serialization-spec-parser'
 import * as formatLibrary from 'gutenberg/packages/format-library'
-// import * as listReusableBlocks from 'gutenberg/packages/list-reusable-blocks'
+import * as listReusableBlocks from 'gutenberg/packages/list-reusable-blocks'
 import * as priorityQueue from 'gutenberg/packages/priority-queue'
 import * as serverSideRender from 'gutenberg/packages/server-side-render'
 import * as dataControls from 'gutenberg/packages/data-controls'
@@ -72,10 +71,9 @@ const imports = {
   i18n,
   isShallowEqual,
   keycodes,
-  // listReusableBlocks,
+  listReusableBlocks,
   mediaUtils,
   notices,
-  nux,
   plugins,
   priorityQueue,
   reduxRoutine,
