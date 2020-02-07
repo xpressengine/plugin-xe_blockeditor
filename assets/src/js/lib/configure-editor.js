@@ -193,14 +193,14 @@ function setupSubmit (target) {
       })
 
       if (tags.length) {
-        window.jQuery('input.paramTags').remove(``)
+        window.jQuery('input.paramTags').remove()
         tags.forEach((val) => {
           $form.append(`<input type="hidden" class="paramTags" name="_tags[]" value="${val}">`)
         })
       }
 
       if ($metaboxes.length) {
-        window.jquery('.__taxonomy-field input').each((idx, item) => {
+        window.jQuery('.__taxonomy-field input').each((idx, item) => {
           const $this = window.jQuery(item)
           const fieldName = $this.attr('name')
           const value = $this.val()
