@@ -29,12 +29,12 @@ export default function configureEditor (options) {
  */
 export function clearSubmitFromButtons () {
   // Add class to all buttons that are in a form inside the editor
-  elementRendered('.laraberg__editor form button', (el) => {
+  elementRendered('.xe-blockeditor__editor form button', (el) => {
     el.classList.add('lb-form__button')
   })
   // Set type to 'button' for all buttons not in a form
   // We'll assume that Gutenberg correctly sets the button types for buttons that are in a form
-  elementRendered('.laraberg__editor button:not(.lb-form__button)', (el) => {
+  elementRendered('.xe-blockeditor__editor button:not(.lb-form__button)', (el) => {
     el.type = 'button'
   })
 }
@@ -53,7 +53,42 @@ function disableWPBlocks () {
     'core/calendar',
     'core/rss',
     'core/search',
-    'core/tag-cloud'
+    'core/tag-cloud',
+    'core/embed',
+    'core-embed/twitter',
+    'core-embed/youtube',
+    'core-embed/facebook',
+    'core-embed/instagram',
+    'core-embed/wordpress',
+    'core-embed/soundcloud',
+    'core-embed/spotify',
+    'core-embed/flickr',
+    'core-embed/vimeo',
+    'core-embed/animoto',
+    'core-embed/cloudup',
+    'core-embed/collegehumor',
+    'core-embed/crowdsignal',
+    'core-embed/dailymotion',
+    'core-embed/hulu',
+    'core-embed/imgur',
+    'core-embed/issuu',
+    'core-embed/kickstarter',
+    'core-embed/meetup-com',
+    'core-embed/mixcloud',
+    'core-embed/polldaddy',
+    'core-embed/reddit',
+    'core-embed/reverbnation',
+    'core-embed/screencast',
+    'core-embed/scribd',
+    'core-embed/slideshare',
+    'core-embed/smugmug',
+    'core-embed/speaker',
+    'core-embed/speaker-deck',
+    'core-embed/ted',
+    'core-embed/tumblr',
+    'core-embed/videopress',
+    'core-embed/wordpress-tv',
+    'core-embed/amazon-kindle'
   ])
 }
 
@@ -129,6 +164,31 @@ function setupSubmit (target) {
       textarea.value = data.select('core/editor').getEditedPostContent()
       // Clear content "dirty" state.
       // data.dispatch('core/editor').savePost()
+
+      // board tag
+      const $tagField = window.jQuery('#xeBoardTagWrap')
+      const $taxonomyField = window.jQuery('.__taxonomy-field')
+      const $form = window.jQuery(textarea.form)
+      const tags = []
+      $tagField.find('.tag-center span').each(function (item) {
+        tags.push($(this).text())
+      })
+
+      if (tags.length) {
+        window.jQuery('input.paramTags').remove()
+        tags.forEach((val) => {
+          $form.append(`<input type="hidden" class="paramTags" name="_tags[]" value="${val}">`)
+        })
+      }
+
+      if ($taxonomyField.length) {
+        $taxonomyField.each((idx, item) => {
+          const $item = window.jQuery(item)
+          const $field = $item.find('input')
+          $form.append($field.clone())
+        })
+      }
+
       return true
     })
   }

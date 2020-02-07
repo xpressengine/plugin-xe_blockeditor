@@ -44,11 +44,11 @@ export const editorSettings = {
   titlePlaceholder: 'Add title',
   bodyPlaceholder: 'Write your story',
   isRTL: false,
+  maxWidth: 1044,
   hasPermissionsToManageWidgets: true,
   postLock: {
     isLocked: false
-  },
-  autosaveInterval: 9999
+  }
 }
 
 // Post properties to override

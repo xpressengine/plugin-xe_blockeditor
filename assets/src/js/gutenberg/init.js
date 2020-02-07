@@ -3,6 +3,15 @@ import { configureAPI } from '../api/api-fetch'
 import configureEditor from '../lib/configure-editor'
 import { elementReady } from '../lib/element-ready'
 
+import { DateTimePicker, Button, Dropdown } from '@wordpress/components'
+import { __experimentalGetSettings } from '@wordpress/date'
+import { withState } from '@wordpress/compose'
+
+// --------------
+
+const { registerPlugin } = window.wp.plugins
+const { Panel, PanelBody, PanelRow } = window.wp.components
+
 const { blocks, data, domReady, editPost } = window.wp
 const { unregisterBlockType, registerBlockType, getBlockType } = blocks
 

@@ -82,9 +82,9 @@ export const types = {
       'page-attributes': false, // hide page-attributes panel
       revisions: false,
       thumbnail: false, // featured-image panel
-      title: false // show title on editor
+      title: true // show title on editor
     },
-    taxonomies: [],
+    taxonomies: ['asefasef'],
     viewable: false,
     saveable: false,
     publishable: false,
@@ -106,28 +106,28 @@ export const types = {
 }
 
 export const user = {
-  "id": 1,
-  "name": "bnu",
-  "url": "",
-  "description": "",
-  "link": "http://wp.bnu.udd.kr/author/bnu/",
-  "slug": "bnu",
-  "avatar_urls": {
-      "24": "http://2.gravatar.com/avatar/89faf515298da5d0c7177f81e0376b06?s=24&d=mm&r=g",
-      "48": "http://2.gravatar.com/avatar/89faf515298da5d0c7177f81e0376b06?s=48&d=mm&r=g",
-      "96": "http://2.gravatar.com/avatar/89faf515298da5d0c7177f81e0376b06?s=96&d=mm&r=g"
+  id: 1,
+  name: 'bnu',
+  url: '',
+  description: '',
+  link: 'http://wp.bnu.udd.kr/author/bnu/',
+  slug: 'bnu',
+  avatar_urls: {
+    24: 'http://2.gravatar.com/avatar/89faf515298da5d0c7177f81e0376b06?s=24&d=mm&r=g',
+    48: 'http://2.gravatar.com/avatar/89faf515298da5d0c7177f81e0376b06?s=48&d=mm&r=g',
+    96: 'http://2.gravatar.com/avatar/89faf515298da5d0c7177f81e0376b06?s=96&d=mm&r=g'
   },
-  "meta": [],
-  "_links": {
-      "self": [
-          {
-              "href": "http://wp.bnu.udd.kr/wp-json/wp/v2/users/1"
-          }
-      ],
-      "collection": [
-          {
-              "href": "http://wp.bnu.udd.kr/wp-json/wp/v2/users"
-          }
-      ]
+  meta: [],
+  _links: {
+    self: [
+      {
+        href: 'http://wp.bnu.udd.kr/wp-json/wp/v2/users/1'
+      }
+    ],
+    collection: [
+      {
+        href: 'http://wp.bnu.udd.kr/wp-json/wp/v2/users'
+      }
+    ]
   }
 }
