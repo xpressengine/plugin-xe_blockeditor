@@ -159,7 +159,25 @@ function setupSidebar (options) {
 function setupSubmit (target) {
   clearSubmitFromButtons()
   const textarea = document.getElementById(target)
+
   if (textarea.form) {
+
+    window.jQuery(function () {
+      const $metaboxes = window.jQuery('#metaboxes')
+
+      window.jQuery(document).on('change', '.__taxonomy-field input', function () {
+        const $this = window.jQuery(this)
+        const fieldName = $this.attr('name')
+        const value = $this.val()
+
+        if (!$metaboxes.find(`[name=${fieldName}]`).length) {
+          $metaboxes.append(window.jQuery(`<input type="text" name="${fieldName}">`)).val(value)
+        }
+
+        $metaboxes.find(`[name=${fieldName}]`).val(value)
+      })
+    })
+
     textarea.form.addEventListener('submit', event => {
       textarea.value = data.select('core/editor').getEditedPostContent()
       // Clear content "dirty" state.
@@ -167,7 +185,7 @@ function setupSubmit (target) {
 
       // board tag
       const $tagField = window.jQuery('#xeBoardTagWrap')
-      const $taxonomyField = window.jQuery('.__taxonomy-field')
+      const $metaboxes = window.jQuery('#metaboxes')
       const $form = window.jQuery(textarea.form)
       const tags = []
       $tagField.find('.tag-center span').each(function (item) {
@@ -175,17 +193,23 @@ function setupSubmit (target) {
       })
 
       if (tags.length) {
-        window.jQuery('input.paramTags').remove()
+        window.jQuery('input.paramTags').remove(``)
         tags.forEach((val) => {
           $form.append(`<input type="hidden" class="paramTags" name="_tags[]" value="${val}">`)
         })
       }
 
-      if ($taxonomyField.length) {
-        $taxonomyField.each((idx, item) => {
-          const $item = window.jQuery(item)
-          const $field = $item.find('input')
-          $form.append($field.clone())
+      if ($metaboxes.length) {
+        window.jquery('.__taxonomy-field input').each((idx, item) => {
+          const $this = window.jQuery(item)
+          const fieldName = $this.attr('name')
+          const value = $this.val()
+
+          if (!$metaboxes.find(`[name=${fieldName}]`).length) {
+            $metaboxes.append(window.jQuery(`<input type="text" name="${fieldName}">`)).val(value)
+          }
+
+          $metaboxes.find(`[name=${fieldName}]`).val(value)
         })
       }
 
