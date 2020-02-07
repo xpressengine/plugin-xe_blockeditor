@@ -82,7 +82,7 @@ export const types = {
       'page-attributes': false, // hide page-attributes panel
       revisions: false,
       thumbnail: false, // featured-image panel
-      title: true // show title on editor
+      title: false // show title on editor
     },
     taxonomies: ['asefasef'],
     viewable: false,
