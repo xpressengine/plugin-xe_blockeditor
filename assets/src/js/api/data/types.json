@@ -32,20 +32,20 @@
     "slug": "page",
     "supports": {
       "author": false,
-      "comments": true,
+      "comments": false,
       "custom-fields": false,
-      "discussion": true,
+      "discussion": false,
       "editor": true,
-      "excerpt": true,
-      "page-attributes": true,
+      "excerpt": false,
+      "page-attributes": false,
       "revisions": false,
-      "thumbnail": true,
-      "title": true
+      "thumbnail": false,
+      "title": false
     },
     "taxonomies": [],
     "viewable": false,
-    "saveable": true,
-    "publishable": true,
+    "saveable": false,
+    "publishable": false,
     "autosaveable": false,
     "rest_base": "pages"
   },
