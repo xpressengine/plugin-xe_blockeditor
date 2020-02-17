@@ -12874,7 +12874,10 @@ body.block-editor-page {
     position: static;
     top: 0; }
   .gutenberg__editor .edit-post-layout {
-    padding-top: 0; } }
+    padding-top: 0; }
+  .edit-post-sidebar > .components-panel {
+    overflow: auto;
+    max-height: calc(100vh - 129px); } }
 
 .gutenberg__editor.fixed-height .components-drop-zone__provider,
 .gutenberg__editor.fixed-height .components-navigate-regions {
