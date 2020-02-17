@@ -2,18 +2,20 @@
  * External dependencies
  */
 import classnames from 'classnames';
-import { first, last, findIndex } from 'lodash';
+import { first, last, omit } from 'lodash';
 import { animated } from 'react-spring/web.cjs';
 
 /**
  * WordPress dependencies
  */
-import { useRef, useEffect, useLayoutEffect, useState, useCallback, useContext } from '@wordpress/element';
 import {
-	focus,
-	isTextField,
-	placeCaretAtHorizontalEdge,
-} from '@wordpress/dom';
+	useRef,
+	useEffect,
+	useLayoutEffect,
+	useState,
+	useContext,
+} from '@wordpress/element';
+import { focus, isTextField, placeCaretAtHorizontalEdge } from '@wordpress/dom';
 import { BACKSPACE, DELETE, ENTER } from '@wordpress/keycodes';
 import {
 	getBlockType,
@@ -21,17 +23,12 @@ import {
 	isReusableBlock,
 	isUnmodifiedDefaultBlock,
 	getUnregisteredTypeHandlerName,
-	__experimentalGetAccessibleBlockLabel as getAccessibleBlockLabel,
 } from '@wordpress/blocks';
-import { withFilters, Popover } from '@wordpress/components';
-import {
-	withDispatch,
-	withSelect,
-	useSelect,
-} from '@wordpress/data';
+import { withFilters } from '@wordpress/components';
+import { __, sprintf } from '@wordpress/i18n';
+import { withDispatch, withSelect, useSelect } from '@wordpress/data';
 import { withViewportMatch } from '@wordpress/viewport';
 import { compose, pure, ifCondition } from '@wordpress/compose';
-import { useShortcut } from '@wordpress/keyboard-shortcuts';
 
 /**
  * Internal dependencies
@@ -41,64 +38,27 @@ import BlockInvalidWarning from './block-invalid-warning';
 import BlockCrashWarning from './block-crash-warning';
 import BlockCrashBoundary from './block-crash-boundary';
 import BlockHtml from './block-html';
-import BlockBreadcrumb from './breadcrumb';
-import BlockContextualToolbar from './block-contextual-toolbar';
-import Inserter from '../inserter';
 import { isInsideRootBlock } from '../../utils/dom';
 import useMovingAnimation from './moving-animation';
-import { ChildToolbar, ChildToolbarSlot } from './block-child-toolbar';
-import { Context } from './root-container';
-
-/**
- * A debounced version of getAccessibleBlockLabel, avoids unnecessary updates to the aria-label attribute
- * when typing in some blocks, like the paragraph.
- *
- * @param {Object} blockType      The block type object representing the block's definition.
- * @param {Object} attributes     The block's attribute values.
- * @param {number} index          The index of the block in the block list.
- * @param {string} moverDirection A string representing whether the movers are displayed vertically or horizontally.
- * @param {number} delay          The debounce delay.
- */
-const useDebouncedAccessibleBlockLabel = ( blockType, attributes, index, moverDirection, delay ) => {
-	const [ blockLabel, setBlockLabel ] = useState( '' );
-
-	useEffect( () => {
-		const timeoutId = setTimeout( () => {
-			setBlockLabel( getAccessibleBlockLabel( blockType, attributes, index + 1, moverDirection ) );
-		}, delay );
-
-		return () => {
-			clearTimeout( timeoutId );
-		};
-	}, [ blockType, attributes, index, moverDirection, delay ] );
-
-	return blockLabel;
-};
+import { Context, BlockNodes } from './root-container';
 
 function BlockListBlock( {
 	mode,
 	isFocusMode,
-	hasFixedToolbar,
-	moverDirection,
 	isLocked,
 	clientId,
-	rootClientId,
 	isSelected,
 	isMultiSelected,
 	isPartOfMultiSelection,
 	isFirstMultiSelected,
+	isLastMultiSelected,
 	isTypingWithinBlock,
-	isCaretWithinFormattedText,
 	isEmptyDefaultBlock,
 	isAncestorOfSelectedBlock,
-	isCapturingDescendantToolbars,
-	hasAncestorCapturingToolbars,
 	isSelectionEnabled,
 	className,
 	name,
-	index,
 	isValid,
-	isLast,
 	attributes,
 	initialPosition,
 	wrapperProps,
@@ -106,7 +66,6 @@ function BlockListBlock( {
 	onReplace,
 	onInsertBlocksAfter,
 	onMerge,
-	onSelect,
 	onRemove,
 	onInsertDefaultBlockAfter,
 	toggleSelection,
@@ -114,11 +73,10 @@ function BlockListBlock( {
 	enableAnimation,
 	isNavigationMode,
 	isMultiSelecting,
-	isLargeViewport,
 	hasSelectedUI = true,
-	hasMovers = true,
 } ) {
 	const onSelectionStart = useContext( Context );
+	const [ , setBlockNodes ] = useContext( BlockNodes );
 	// In addition to withSelect, we should favor using useSelect in this component going forward
 	// to avoid leaking new props to the public API (editor.BlockListBlock filter)
 	const { isDraggingBlocks } = useSelect( ( select ) => {
@@ -130,17 +88,27 @@ function BlockListBlock( {
 	// Reference of the wrapper
 	const wrapper = useRef( null );
 
-	// Reference to the block edit node
-	const blockNodeRef = useRef();
+	// Provide the selected node, or the first and last nodes of a multi-
+	// selection, so it can be used to position the contextual block toolbar.
+	// We only provide what is necessary, and remove the nodes again when they
+	// are no longer selected.
+	useLayoutEffect( () => {
+		if ( isSelected || isFirstMultiSelected || isLastMultiSelected ) {
+			const node = wrapper.current;
+			setBlockNodes( ( nodes ) => ( { ...nodes, [ clientId ]: node } ) );
+			return () => {
+				setBlockNodes( ( nodes ) => omit( nodes, clientId ) );
+			};
+		}
+	}, [ isSelected, isFirstMultiSelected, isLastMultiSelected ] );
 
 	// Handling the error state
 	const [ hasError, setErrorState ] = useState( false );
 	const onBlockError = () => setErrorState( true );
 
-	const [ isToolbarForced, setIsToolbarForced ] = useState( false );
-
 	const blockType = getBlockType( name );
-	const blockAriaLabel = useDebouncedAccessibleBlockLabel( blockType, attributes, index, moverDirection, 400 );
+	// translators: %s: Type of block (i.e. Text, Image etc)
+	const blockLabel = sprintf( __( 'Block: %s' ), blockType.title );
 
 	// Handing the focus of the block on creation and update
 
@@ -160,10 +128,14 @@ function BlockListBlock( {
 
 		// Find all tabbables within node.
 		const textInputs = focus.tabbable
-			.find( blockNodeRef.current )
+			.find( wrapper.current )
 			.filter( isTextField )
 			// Exclude inner blocks
-			.filter( ( node ) => ! ignoreInnerBlocks || isInsideRootBlock( blockNodeRef.current, node ) );
+			.filter(
+				( node ) =>
+					! ignoreInnerBlocks ||
+					isInsideRootBlock( wrapper.current, node )
+			);
 
 		// If reversed (e.g. merge via backspace), use the last in the set of
 		// tabbables.
@@ -180,29 +152,23 @@ function BlockListBlock( {
 
 	// Focus the selected block's wrapper or inner input on mount and update
 	const isMounting = useRef( true );
+
 	useEffect( () => {
-		if ( isSelected && ! isMultiSelecting ) {
+		if ( ! isMultiSelecting && ! isNavigationMode && isSelected ) {
 			focusTabbable( ! isMounting.current );
 		}
-		isMounting.current = false;
-	}, [ isSelected, isMultiSelecting ] );
 
-	// Focus the first multi selected block
-	useEffect( () => {
-		if ( isFirstMultiSelected ) {
-			wrapper.current.focus();
-		}
-	}, [ isFirstMultiSelected ] );
+		isMounting.current = false;
+	}, [ isSelected, isMultiSelecting, isNavigationMode ] );
 
 	// Block Reordering animation
-	const animationStyle = useMovingAnimation( wrapper, isSelected || isPartOfMultiSelection, isSelected || isFirstMultiSelected, enableAnimation, animateOnChange );
-
-	// Focus the first editable or the wrapper if edit mode.
-	useLayoutEffect( () => {
-		if ( isSelected && ! isNavigationMode ) {
-			focusTabbable( true );
-		}
-	}, [ isSelected, isNavigationMode ] );
+	const animationStyle = useMovingAnimation(
+		wrapper,
+		isSelected || isPartOfMultiSelection,
+		isSelected || isFirstMultiSelected,
+		enableAnimation,
+		animateOnChange
+	);
 
 	// Other event handlers
 
@@ -248,48 +214,30 @@ function BlockListBlock( {
 		}
 	};
 
-	const selectOnOpen = ( open ) => {
-		if ( open && ! isSelected ) {
-			onSelect();
-		}
-	};
-
-	const canFocusHiddenToolbar = (
-		! isNavigationMode &&
-		! shouldShowContextualToolbar &&
-		isSelected &&
-		! hasFixedToolbar &&
-		! isEmptyDefaultBlock
-	);
-	useShortcut(
-		'core/block-editor/focus-toolbar',
-		useCallback( () => setIsToolbarForced( true ), [] ),
-		{ bindGlobal: true, eventName: 'keydown', isDisabled: ! canFocusHiddenToolbar }
-	);
-
 	const isUnregisteredBlock = name === getUnregisteredTypeHandlerName();
 
 	// If the block is selected and we're typing the block should not appear.
 	// Empty paragraph blocks should always show up as unselected.
-	const showEmptyBlockSideInserter = ! isNavigationMode && ( isSelected || isLast ) && isEmptyDefaultBlock && isValid;
+	const showEmptyBlockSideInserter =
+		! isNavigationMode && isSelected && isEmptyDefaultBlock && isValid;
 	const shouldAppearSelected =
 		! isFocusMode &&
 		! showEmptyBlockSideInserter &&
 		isSelected &&
 		! isTypingWithinBlock;
-	const shouldShowBreadcrumb = isNavigationMode && isSelected;
-	const shouldShowContextualToolbar =
-		! isNavigationMode &&
-		! hasFixedToolbar &&
-		isLargeViewport &&
-		! showEmptyBlockSideInserter &&
-		! isMultiSelecting &&
-		(
-			( isSelected && ( ! isTypingWithinBlock || isCaretWithinFormattedText ) ) ||
-			isFirstMultiSelected
-		);
 
-	const isDragging = isDraggingBlocks && ( isSelected || isPartOfMultiSelection );
+	const isDragging =
+		isDraggingBlocks && ( isSelected || isPartOfMultiSelection );
+
+	// Determine whether the block has props to apply to the wrapper.
+	if ( blockType.getEditWrapperProps ) {
+		wrapperProps = {
+			...wrapperProps,
+			...blockType.getEditWrapperProps( attributes ),
+		};
+	}
+
+	const isAligned = wrapperProps && wrapperProps[ 'data-align' ];
 
 	// The wp-block className is important for editor styles.
 	// Generate the wrapper class names handling the different states of the block.
@@ -299,26 +247,19 @@ function BlockListBlock( {
 			'has-selected-ui': hasSelectedUI,
 			'has-warning': ! isValid || !! hasError || isUnregisteredBlock,
 			'is-selected': shouldAppearSelected && hasSelectedUI,
-			'is-navigate-mode': isNavigationMode,
 			'is-multi-selected': isMultiSelected,
 			'is-reusable': isReusableBlock( blockType ),
 			'is-dragging': isDragging,
 			'is-typing': isTypingWithinBlock,
-			'is-focused': isFocusMode && ( isSelected || isAncestorOfSelectedBlock ),
+			'is-focused':
+				isFocusMode && ( isSelected || isAncestorOfSelectedBlock ),
 			'is-focus-mode': isFocusMode,
 			'has-child-selected': isAncestorOfSelectedBlock,
-			'has-toolbar-captured': hasAncestorCapturingToolbars,
+			'is-block-collapsed': isAligned,
 		},
 		className
 	);
 
-	// Determine whether the block has props to apply to the wrapper.
-	if ( blockType.getEditWrapperProps ) {
-		wrapperProps = {
-			...wrapperProps,
-			...blockType.getEditWrapperProps( attributes ),
-		};
-	}
 	const blockElementId = `block-${ clientId }`;
 
 	// We wrap the BlockEdit component in a div that hides it when editing in
@@ -339,134 +280,58 @@ function BlockListBlock( {
 			toggleSelection={ toggleSelection }
 		/>
 	);
+
+	// For aligned blocks, provide a wrapper element so the block can be
+	// positioned relative to the block column. This is enabled with the
+	// .is-block-content className.
+	if ( isAligned ) {
+		blockEdit = <div className="is-block-content">{ blockEdit }</div>;
+	}
+
 	if ( mode !== 'visual' ) {
 		blockEdit = <div style={ { display: 'none' } }>{ blockEdit }</div>;
 	}
-
-	/**
-	 * Renders an individual `BlockContextualToolbar` component.
-	 * This needs to be a function which generates the component
-	 * on demand as we can only have a single toolbar for each render.
-	 * This is because of the `isForcingContextualToolbar` logic which
-	 * relies on a single toolbar being rendered to update the boolean
-	 * value of the ref used to track the "force" state.
-	 */
-	const renderBlockContextualToolbar = () => (
-		<BlockContextualToolbar
-			// If the toolbar is being shown because of being forced
-			// it should focus the toolbar right after the mount.
-			focusOnMount={ isToolbarForced }
-			data-type={ name }
-			data-align={ wrapperProps ? wrapperProps[ 'data-align' ] : undefined }
-			hasMovers={ hasMovers }
-		/>
-	);
-
-	// Position above the anchor, pop out towards the right, and position in the
-	// left corner. For the side inserter, pop out towards the left, and
-	// position in the right corner.
-	// To do: refactor `Popover` to make this prop clearer.
-	const popoverPosition = showEmptyBlockSideInserter ? 'top left right' : 'top right left';
-	const popoverIsSticky = isPartOfMultiSelection ? '.wp-block.is-multi-selected' : true;
 
 	return (
 		<animated.div
 			id={ blockElementId }
 			ref={ wrapper }
 			className={ wrapperClassName }
+			data-block={ clientId }
 			data-type={ name }
 			// Only allow shortcuts when a blocks is selected and not locked.
 			onKeyDown={ isSelected && ! isLocked ? onKeyDown : undefined }
+			// Only allow selection to be started from a selected block.
+			onMouseLeave={ isSelected ? onMouseLeave : undefined }
 			tabIndex="0"
-			aria-label={ blockAriaLabel }
+			aria-label={ blockLabel }
 			role="group"
 			{ ...wrapperProps }
 			style={
-				wrapperProps && wrapperProps.style ?
-					{
-						...wrapperProps.style,
-						...animationStyle,
-					} :
-					animationStyle
+				wrapperProps && wrapperProps.style
+					? {
+							...wrapperProps.style,
+							...animationStyle,
+					  }
+					: animationStyle
 			}
 		>
-			{ hasAncestorCapturingToolbars && ( shouldShowContextualToolbar || isToolbarForced ) && (
-				// If the parent Block is set to consume toolbars of the child Blocks
-				// then render the child Block's toolbar into the Slot provided
-				// by the parent.
-				<ChildToolbar>
-					{ renderBlockContextualToolbar() }
-				</ChildToolbar>
-			) }
-			{ (
-				shouldShowBreadcrumb ||
-				shouldShowContextualToolbar ||
-				isToolbarForced ||
-				showEmptyBlockSideInserter ||
-				isCapturingDescendantToolbars
-			) && (
-				<Popover
-					noArrow
-					animate={ false }
-					position={ popoverPosition }
-					focusOnMount={ false }
-					anchorRef={ blockNodeRef.current }
-					className="block-editor-block-list__block-popover"
-					__unstableSticky={ showEmptyBlockSideInserter ? false : popoverIsSticky }
-					__unstableSlotName="block-toolbar"
-					// Allow subpixel positioning for the block movement animation.
-					__unstableAllowVerticalSubpixelPosition={ moverDirection !== 'horizontal' && wrapper.current }
-					__unstableAllowHorizontalSubpixelPosition={ moverDirection === 'horizontal' && wrapper.current }
-					onBlur={ () => setIsToolbarForced( false ) }
-				>
-					{ ! hasAncestorCapturingToolbars && ( shouldShowContextualToolbar || isToolbarForced ) && renderBlockContextualToolbar() }
-					{ ( isCapturingDescendantToolbars ) && (
-						// A slot made available on all ancestors of the selected Block
-						// to allow child Blocks to render their toolbars into the DOM
-						// of the appropriate parent.
-						<ChildToolbarSlot />
-					) }
-					{ shouldShowBreadcrumb && (
-						<BlockBreadcrumb
-							clientId={ clientId }
-							data-align={ wrapperProps ? wrapperProps[ 'data-align' ] : undefined }
-						/>
-					) }
-					{ showEmptyBlockSideInserter && (
-						<div className="block-editor-block-list__empty-block-inserter">
-							<Inserter
-								position="top right"
-								onToggle={ selectOnOpen }
-								rootClientId={ rootClientId }
-								clientId={ clientId }
-							/>
-						</div>
-					) }
-				</Popover>
-			) }
-			<div
-				ref={ blockNodeRef }
-				// Only allow selection to be started from a selected block.
-				onMouseLeave={ isSelected ? onMouseLeave : undefined }
-				data-block={ clientId }
-			>
-				<BlockCrashBoundary onError={ onBlockError }>
-					{ isValid && blockEdit }
-					{ isValid && mode === 'html' && (
-						<BlockHtml clientId={ clientId } />
-					) }
-					{ ! isValid && [
-						<BlockInvalidWarning
-							key="invalid-warning"
-							clientId={ clientId }
-						/>,
-						<div key="invalid-preview">
-							{ getSaveElement( blockType, attributes ) }
-						</div>,
-					] }
-				</BlockCrashBoundary>
-				{ !! hasError && <BlockCrashWarning /> }
-			</div>
+			<BlockCrashBoundary onError={ onBlockError }>
+				{ isValid && blockEdit }
+				{ isValid && mode === 'html' && (
+					<BlockHtml clientId={ clientId } />
+				) }
+				{ ! isValid && [
+					<BlockInvalidWarning
+						key="invalid-warning"
+						clientId={ clientId }
+					/>,
+					<div key="invalid-preview">
+						{ getSaveElement( blockType, attributes ) }
+					</div>,
+				] }
+			</BlockCrashBoundary>
+			{ !! hasError && <BlockCrashWarning /> }
 		</animated.div>
 	);
 }
@@ -478,51 +343,29 @@ const applyWithSelect = withSelect(
 			isAncestorMultiSelected,
 			isBlockMultiSelected,
 			isFirstMultiSelectedBlock,
+			getLastMultiSelectedBlockClientId,
 			isTyping,
-			isCaretWithinFormattedText,
 			getBlockMode,
 			isSelectionEnabled,
 			getSelectedBlocksInitialCaretPosition,
 			getSettings,
 			hasSelectedInnerBlock,
 			getTemplateLock,
-			getBlockIndex,
-			getBlockOrder,
 			__unstableGetBlockWithoutInnerBlocks,
 			isNavigationMode,
-			getBlockListSettings,
-			__experimentalGetBlockListSettingsForBlocks,
-			getBlockParents,
 		} = select( 'core/block-editor' );
 
 		const block = __unstableGetBlockWithoutInnerBlocks( clientId );
-
 		const isSelected = isBlockSelected( clientId );
-		const { hasFixedToolbar, focusMode, isRTL } = getSettings();
+		const { focusMode, isRTL } = getSettings();
 		const templateLock = getTemplateLock( rootClientId );
 		const checkDeep = true;
 
 		// "ancestor" is the more appropriate label due to "deep" check
-		const isAncestorOfSelectedBlock = hasSelectedInnerBlock( clientId, checkDeep );
-		const index = getBlockIndex( clientId, rootClientId );
-		const blockOrder = getBlockOrder( rootClientId );
-		const blockParentsClientIds = getBlockParents( clientId );
-		const currentBlockListSettings = getBlockListSettings( clientId );
-
-		// Get Block List Settings for all ancestors of the current Block clientId
-		const ancestorBlockListSettings = __experimentalGetBlockListSettingsForBlocks( blockParentsClientIds );
-
-		// Find the index of the first Block with the `captureDescendantsToolbars` prop defined
-		// This will be the top most ancestor because getBlockParents() returns tree from top -> bottom
-		const topmostAncestorWithCaptureDescendantsToolbarsIndex = findIndex( ancestorBlockListSettings, [ '__experimentalCaptureToolbars', true ] );
-
-		// Boolean to indicate whether current Block has a parent with `captureDescendantsToolbars` set
-		const hasAncestorCapturingToolbars = topmostAncestorWithCaptureDescendantsToolbarsIndex !== -1 ? true : false;
-
-		// Is the *current* Block the one capturing all its descendant toolbars?
-		// If there is no `topmostAncestorWithCaptureDescendantsToolbarsIndex` then
-		// we're at the top of the tree
-		const isCapturingDescendantToolbars = isAncestorOfSelectedBlock && ( currentBlockListSettings && currentBlockListSettings.__experimentalCaptureToolbars ) && ! hasAncestorCapturingToolbars;
+		const isAncestorOfSelectedBlock = hasSelectedInnerBlock(
+			clientId,
+			checkDeep
+		);
 
 		// The fallback to `{}` is a temporary fix.
 		// This function should never be called when a block is not present in the state.
@@ -532,26 +375,27 @@ const applyWithSelect = withSelect(
 		return {
 			isMultiSelected: isBlockMultiSelected( clientId ),
 			isPartOfMultiSelection:
-				isBlockMultiSelected( clientId ) || isAncestorMultiSelected( clientId ),
+				isBlockMultiSelected( clientId ) ||
+				isAncestorMultiSelected( clientId ),
 			isFirstMultiSelected: isFirstMultiSelectedBlock( clientId ),
+			isLastMultiSelected:
+				getLastMultiSelectedBlockClientId() === clientId,
 
 			// We only care about this prop when the block is selected
 			// Thus to avoid unnecessary rerenders we avoid updating the prop if the block is not selected.
 			isTypingWithinBlock:
 				( isSelected || isAncestorOfSelectedBlock ) && isTyping(),
-			isCaretWithinFormattedText: isSelected && isCaretWithinFormattedText(),
 
 			mode: getBlockMode( clientId ),
 			isSelectionEnabled: isSelectionEnabled(),
-			initialPosition: isSelected ? getSelectedBlocksInitialCaretPosition() : null,
+			initialPosition: isSelected
+				? getSelectedBlocksInitialCaretPosition()
+				: null,
 			isEmptyDefaultBlock:
 				name && isUnmodifiedDefaultBlock( { name, attributes } ),
 			isLocked: !! templateLock,
 			isFocusMode: focusMode && isLargeViewport,
-			hasFixedToolbar: hasFixedToolbar && isLargeViewport,
-			isLast: index === blockOrder.length - 1,
 			isNavigationMode: isNavigationMode(),
-			index,
 			isRTL,
 
 			// Users of the editor.BlockListBlock filter used to be able to access the block prop
@@ -564,8 +408,6 @@ const applyWithSelect = withSelect(
 			isValid,
 			isSelected,
 			isAncestorOfSelectedBlock,
-			isCapturingDescendantToolbars,
-			hasAncestorCapturingToolbars,
 		};
 	}
 );
@@ -573,7 +415,6 @@ const applyWithSelect = withSelect(
 const applyWithDispatch = withDispatch( ( dispatch, ownProps, { select } ) => {
 	const {
 		updateBlockAttributes,
-		selectBlock,
 		insertBlocks,
 		insertDefaultBlock,
 		removeBlock,
@@ -588,26 +429,19 @@ const applyWithDispatch = withDispatch( ( dispatch, ownProps, { select } ) => {
 			const { clientId } = ownProps;
 			updateBlockAttributes( clientId, newAttributes );
 		},
-		onSelect( clientId = ownProps.clientId, initialPosition ) {
-			selectBlock( clientId, initialPosition );
-		},
 		onInsertBlocks( blocks, index ) {
 			const { rootClientId } = ownProps;
 			insertBlocks( blocks, index, rootClientId );
 		},
 		onInsertDefaultBlockAfter() {
 			const { clientId, rootClientId } = ownProps;
-			const {
-				getBlockIndex,
-			} = select( 'core/block-editor' );
+			const { getBlockIndex } = select( 'core/block-editor' );
 			const index = getBlockIndex( clientId, rootClientId );
 			insertDefaultBlock( {}, rootClientId, index + 1 );
 		},
 		onInsertBlocksAfter( blocks ) {
 			const { clientId, rootClientId } = ownProps;
-			const {
-				getBlockIndex,
-			} = select( 'core/block-editor' );
+			const { getBlockIndex } = select( 'core/block-editor' );
 			const index = getBlockIndex( clientId, rootClientId );
 			insertBlocks( blocks, index + 1, rootClientId );
 		},
@@ -616,10 +450,9 @@ const applyWithDispatch = withDispatch( ( dispatch, ownProps, { select } ) => {
 		},
 		onMerge( forward ) {
 			const { clientId } = ownProps;
-			const {
-				getPreviousBlockClientId,
-				getNextBlockClientId,
-			} = select( 'core/block-editor' );
+			const { getPreviousBlockClientId, getNextBlockClientId } = select(
+				'core/block-editor'
+			);
 
 			if ( forward ) {
 				const nextBlockClientId = getNextBlockClientId( clientId );
@@ -627,7 +460,9 @@ const applyWithDispatch = withDispatch( ( dispatch, ownProps, { select } ) => {
 					mergeBlocks( clientId, nextBlockClientId );
 				}
 			} else {
-				const previousBlockClientId = getPreviousBlockClientId( clientId );
+				const previousBlockClientId = getPreviousBlockClientId(
+					clientId
+				);
 				if ( previousBlockClientId ) {
 					mergeBlocks( previousBlockClientId, clientId );
 				}
