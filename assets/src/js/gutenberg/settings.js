@@ -1,4 +1,4 @@
-import addQueryArgs from './add-query-args'
+import { addQueryArgs } from './add-query-args'
 import apiFetch from '../api/api-fetch'
 
 window.userSettings = {

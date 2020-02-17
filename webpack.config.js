@@ -46,6 +46,10 @@ module.exports = {
     ]
   },
   plugins: [
-    new MiniCssExtractPlugin({ filename: 'xe-blockeditor.css' })
+    new MiniCssExtractPlugin({ filename: 'xe-blockeditor.css' }),
+    new webpack.NormalModuleReplacementPlugin(
+      /gutenberg\/packages\/.+\/add-query-args.js$/,
+      path.resolve(__dirname, './assets/src/js/gutenberg/add-query-args.js')
+    )
   ]
 }
