@@ -181,7 +181,7 @@ function setupSubmit (target) {
     textarea.form.addEventListener('submit', event => {
       textarea.value = data.select('core/editor').getEditedPostContent()
       // Clear content "dirty" state.
-      // data.dispatch('core/editor').savePost()
+      data.dispatch('core/editor').savePost()
 
       // board tag
       const $tagField = window.jQuery('#xeBoardTagWrap')

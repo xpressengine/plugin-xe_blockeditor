@@ -12849,7 +12849,7 @@ body.block-editor-page {
 .gutenberg__editor .edit-post-layout__content {
   position: static;
   margin-left: 0;
-  min-height: calc(250px - 56px);
+  min-height: calc(250px - 50px);
   height: auto;
   overflow-y: auto; }
 
@@ -12876,8 +12876,15 @@ body.block-editor-page {
   .gutenberg__editor .edit-post-layout {
     padding-top: 0; }
   .edit-post-sidebar > .components-panel {
-    overflow: auto;
-    max-height: calc(100vh - 129px); } }
+    overflow: auto; }
+  .block-editor__container {
+    min-height: calc(100vh - 50px);
+    bottom: 50px; }
+  .edit-post-editor-regions__body {
+    height: calc(100vh - 132px); } }
+
+.edit-post-layout__metaboxes {
+  display: none; }
 
 .gutenberg__editor.fixed-height .components-drop-zone__provider,
 .gutenberg__editor.fixed-height .components-navigate-regions {
@@ -12901,7 +12908,7 @@ body.block-editor-page {
   left: 0; }
 
 .write_form_editor {
-  min-height: calc(100vh - 56px); }
+  min-height: calc(100vh - 50px); }
 
 .xe-blockeditor__editor .xeuio-ml__preview-item {
   -webkit-box-flex: 0;

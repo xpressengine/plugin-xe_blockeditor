@@ -11,7 +11,7 @@
   .edit-post-layout__content {
     position: static;
     margin-left: 0;
-    min-height: calc(250px - 56px);
+    min-height: calc(250px - 50px);
     height: auto;
     overflow-y: auto;
   }
@@ -48,8 +48,20 @@
 
   .edit-post-sidebar > .components-panel {
     overflow: auto;
-    max-height: calc(100vh - 129px);
+    // max-height: calc(100vh - 132px)
   }
+
+  .block-editor__container {
+    min-height: calc(100vh - 50px);
+    bottom: 50px;
+  }
+  .edit-post-editor-regions__body {
+    height: calc(100vh - 132px);
+  }
+}
+
+.edit-post-layout__metaboxes {
+  display: none;
 }
 
 .gutenberg__editor.fixed-height {
