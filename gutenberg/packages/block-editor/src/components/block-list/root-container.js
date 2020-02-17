@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-import { createContext, forwardRef } from '@wordpress/element';
+import { createContext, forwardRef, useState } from '@wordpress/element';
 import { useSelect, useDispatch } from '@wordpress/data';
 
 /**
@@ -10,10 +10,12 @@ import { useSelect, useDispatch } from '@wordpress/data';
 import useMultiSelection from './use-multi-selection';
 import { getBlockClientId } from '../../utils/dom';
 import InsertionPoint from './insertion-point';
+import BlockPopover from './block-popover';
 
 /** @typedef {import('@wordpress/element').WPSyntheticEvent} WPSyntheticEvent */
 
 export const Context = createContext();
+export const BlockNodes = createContext();
 
 function selector( select ) {
 	const {
@@ -44,7 +46,7 @@ function onDragStart( event ) {
 	}
 }
 
-function RootContainer( { children, className }, ref ) {
+function RootContainer( { children, className, hasPopover = true }, ref ) {
 	const {
 		selectedBlockClientId,
 		hasMultiSelection,
@@ -76,18 +78,23 @@ function RootContainer( { children, className }, ref ) {
 		<InsertionPoint
 			className={ className }
 			isMultiSelecting={ isMultiSelecting }
+			hasMultiSelection={ hasMultiSelection }
 			selectedBlockClientId={ selectedBlockClientId }
+			containerRef={ ref }
 		>
-			<div
-				ref={ ref }
-				className={ className }
-				onFocus={ onFocus }
-				onDragStart={ onDragStart }
-			>
-				<Context.Provider value={ onSelectionStart }>
-					{ children }
-				</Context.Provider>
-			</div>
+			<BlockNodes.Provider value={ useState( {} ) }>
+				{ hasPopover ? <BlockPopover /> : null }
+				<div
+					ref={ ref }
+					className={ className }
+					onFocus={ onFocus }
+					onDragStart={ onDragStart }
+				>
+					<Context.Provider value={ onSelectionStart }>
+						{ children }
+					</Context.Provider>
+				</div>
+			</BlockNodes.Provider>
 		</InsertionPoint>
 	);
 }
