@@ -25,3 +25,11 @@
 .write_form_editor {
   min-height: calc(100vh - 56px);
 }
+
+.xe-blockeditor__editor .xeuio-ml__preview-item {
+  flex: 0 1 100%;
+}
+.xe-blockeditor__editor .xeuio-ml__add-item,
+.xe-blockeditor__editor .xeuio-ml__add {
+  width: 100%;
+}
