@@ -290,6 +290,14 @@
   padding-right: 24px;
 }
 
+.new-tag-input-wrapper {
+  padding: 2px !important;
+}
+
+.new-tag-input-wrapper input {
+  padding: 8px 6px !important;
+}
+
 .gutenberg__content .xe-content-xe_blog {
   font-family: 'Spoqa Han Sans', sans-serif;
   font-size: 16px;

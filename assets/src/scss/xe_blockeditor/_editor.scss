@@ -49,6 +49,13 @@
   }
 }
 
+.new-tag-input-wrapper {
+  padding: 2px !important;
+}
+.new-tag-input-wrapper input {
+  padding: 8px 6px !important;
+}
+
 @media (min-width: 768px) {
   .xe-blockeditor__editor {
 

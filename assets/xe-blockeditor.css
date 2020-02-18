@@ -12919,5 +12919,13 @@ body.block-editor-page {
 .xe-blockeditor__editor .xeuio-ml__add {
   width: 100%; }
 
+.screen-reader-text {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  margin: -1px;
+  width: 1px;
+  height: 1px; }
+
 
 /*# sourceMappingURL=xe-blockeditor.css.map*/

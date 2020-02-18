@@ -188,6 +188,12 @@ function setupSubmit (target) {
       const $metaboxes = window.jQuery('#metaboxes')
       const $form = window.jQuery(textarea.form)
       const tags = []
+
+      console.debug('before', $metaboxes.find('[name=title]').val())
+      $metaboxes.find('[name=title]').val(window.wp.data.select('core/editor').getEditedPostAttribute('title'))
+      $metaboxes.find('[name=published_at]').val(window.wp.data.select('core/editor').getEditedPostAttribute('date'))
+      console.debug('after', $metaboxes.find('[name=title]').val())
+
       $tagField.find('.tag-center span').each(function (item) {
         tags.push($(this).text())
       })

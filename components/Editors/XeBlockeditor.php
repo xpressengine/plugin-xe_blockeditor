@@ -45,17 +45,23 @@ class XeBlockeditor extends AbstractEditor
     {
         $this->initAssets();
 
-        $script = <<<'DDD'
-        <script>
-            window.addEventListener('DOMContentLoaded', () => {
-                Laraberg.init('xeContentEditor', {
-                    laravelFilemanager: true,
-                    sidear: true,
-                    searchCb: null
-                })
-            })
-        </script>
-DDD;
+        $title = array_get($this->arguments, 'title', '');
+        $publishedAt = array_get($this->arguments, 'publishedAt', null);
+
+        $script = '<script>' .
+            "window.addEventListener('DOMContentLoaded', () => {".
+            "Laraberg.init('xeContentEditor', {".
+            "laravelFilemanager: true,".
+            "sidear: true,".
+            "searchCb: null,".
+            "title: '{$title}',";
+
+        if ($publishedAt) {
+            $script .= "publishedAt: window.XE.moment('{$publishedAt}')";
+        }
+
+        $script .= '}) }) </script>';
+
         $content = '<div class="write_form_editor">';
         $content .= parent::render();
         $content .= '</div>';

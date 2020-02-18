@@ -44,6 +44,7 @@
     "@babel/runtime": "^7.8.4",
     "axios": "^0.19.2",
     "gutenberg": "file:gutenberg",
+    "qs": "^6.9.1",
     "react-dates": "^21.8.0"
   }
 }
