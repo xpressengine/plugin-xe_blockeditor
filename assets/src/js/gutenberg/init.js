@@ -105,7 +105,10 @@ const Picker = compose([withSelect(function (select) {
       dispatch('core/editor').editPost({
         date: date
       })
-      window.$('#metaboxes [name=published_at]').val(window.XE.moment(date).format('YYYY-MM-DD HH:mm:ss'))
+      const momentDate = window.XE.moment(date)
+      if (momentDate.isValid()) {
+        window.$('#metaboxes [name=published_at]').val(momentDate.format('YYYY-MM-DD HH:mm:ss'))
+      }
     }
   }
 })])(PostSchedule)
