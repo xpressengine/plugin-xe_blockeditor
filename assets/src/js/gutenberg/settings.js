@@ -34,7 +34,7 @@ setFetchHandler(apiFetch)
 
 // Some editor settings
 export const editorSettings = {
-  target: null,
+  target: 'xeContentEditor',
   alignWide: true,
   availableTemplates: [],
   allowedBlockTypes: true,

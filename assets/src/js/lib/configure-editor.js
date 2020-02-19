@@ -161,7 +161,6 @@ function setupSubmit (target) {
   const textarea = document.getElementById(target)
 
   if (textarea.form) {
-
     window.jQuery(function () {
       const $metaboxes = window.jQuery('#metaboxes')
 
@@ -188,11 +187,13 @@ function setupSubmit (target) {
       const $metaboxes = window.jQuery('#metaboxes')
       const $form = window.jQuery(textarea.form)
       const tags = []
+      var publishedAt = window.wp.data.select('core/editor').getEditedPostAttribute('date')
+      var momentDate = window.XE.moment(publishedAt)
 
-      console.debug('before', $metaboxes.find('[name=title]').val())
       $metaboxes.find('[name=title]').val(window.wp.data.select('core/editor').getEditedPostAttribute('title'))
-      $metaboxes.find('[name=published_at]').val(window.wp.data.select('core/editor').getEditedPostAttribute('date'))
-      console.debug('after', $metaboxes.find('[name=title]').val())
+      if (momentDate.isValid()) {
+        $metaboxes.find('[name=published_at]').val(momentDate.format('YYYY-MM-DD HH:mm:ss'))
+      }
 
       $tagField.find('.tag-center span').each(function (item) {
         tags.push($(this).text())

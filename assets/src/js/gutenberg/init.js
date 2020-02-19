@@ -15,7 +15,7 @@ export default function init (target, options = {}) {
   configureAPI(options)
 
   // Disable publish sidebar
-  // data.dispatch('core/editor').disablePublishSidebar()
+  data.dispatch('core/editor').disablePublishSidebar()
 
   window._wpLoadGutenbergEditor = new Promise(function (resolve) {
     domReady(async () => {
@@ -30,7 +30,7 @@ export default function init (target, options = {}) {
       await elementReady('.edit-post-layout')
       configureEditor(options)
       window.wp.data.dispatch('core/editor').editPost({
-        title: window.XE._.get(options, 'title', '여기에 제목을 입력해주세요'),
+        title: window.XE._.get(options, 'title', ''),
         date: window.XE._.get(options, 'publishedAt', null)
       })
     })
