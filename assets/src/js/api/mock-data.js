@@ -16,10 +16,10 @@ export const page = {
     raw: '',
     rendered: ''
   },
-  title: {
-    raw: 'Preview page',
-    rendered: 'Preview page'
-  },
+  // title: {
+  //   raw: '',
+  //   rendered: ''
+  // },
   excerpt: {
     raw: '',
     rendered: ''

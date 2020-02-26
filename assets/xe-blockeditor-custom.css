@@ -260,6 +260,10 @@
   }
 }
 
+.components-notice.is-error {
+  display: none;
+}
+
 .block-editor-block-list__layout .block-editor-block-list__block .block-editor-block-drop-zone {
   bottom: -3px;
   margin: 0 14px;

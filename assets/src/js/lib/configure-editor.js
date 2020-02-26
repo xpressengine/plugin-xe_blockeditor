@@ -7,6 +7,8 @@ import setupMockFilemanager from '../mock-file-uploader'
 import setupActions from './actions'
 
 const { data } = window.wp
+const fieldRequired = [/*title, content */]
+let dynamicFieldSetup = false
 
 /**
  * Configures the editor according to the provided options object
@@ -19,6 +21,7 @@ export default function configureEditor (options) {
   setupSubmit(editorSettings.target)
   disableWPBlocks()
   removeElements()
+  taxonomyFieldsSetup(fieldRequired)
   if (options.maxHeight) { setMaxHeight(options.maxHeight) }
   if (options.minHeight) { setMinHeight(options.minHeight) }
   if (options.height) { setHeight(options.height) }
@@ -161,26 +164,10 @@ function setupSubmit (target) {
   const textarea = document.getElementById(target)
 
   if (textarea.form) {
-    window.jQuery(function () {
-      const $metaboxes = window.jQuery('#metaboxes')
-
-      window.jQuery(document).on('change', '.__taxonomy-field input', function () {
-        const $this = window.jQuery(this)
-        const fieldName = $this.attr('name')
-        const value = $this.val()
-
-        if (!$metaboxes.find(`[name=${fieldName}]`).length) {
-          $metaboxes.append(window.jQuery(`<input type="text" name="${fieldName}">`)).val(value)
-        }
-
-        $metaboxes.find(`[name=${fieldName}]`).val(value)
-      })
-    })
-
     textarea.form.addEventListener('submit', event => {
       textarea.value = data.select('core/editor').getEditedPostContent()
-      // Clear content "dirty" state.
-      // data.dispatch('core/editor').savePost()
+
+      taxonomyFieldsSetup(fieldRequired)
 
       // board tag
       const $tagField = window.jQuery('#xeBoardTagWrap')
@@ -188,9 +175,36 @@ function setupSubmit (target) {
       const $form = window.jQuery(textarea.form)
       const tags = []
       var publishedAt = window.wp.data.select('core/editor').getEditedPostAttribute('date')
+      var title = window.wp.data.select('core/editor').getEditedPostAttribute('title')
       var momentDate = window.XE.moment(publishedAt)
 
-      $metaboxes.find('[name=title]').val(window.wp.data.select('core/editor').getEditedPostAttribute('title'))
+      if (typeof title !== 'undefined' && title) {
+        $metaboxes.find('[name=title]').val(title)
+      }
+
+      if (!$metaboxes.find('[name=title]').val()) {
+        event.preventDefault()
+        alert('제목을 입력해주세요')
+        return false
+      }
+
+      if (!$(textarea).val()) {
+        event.preventDefault()
+        alert('내용을 입력해주세요')
+        return false
+      }
+
+      if (fieldRequired.length) {
+        window.XE._.forEach(fieldRequired, function (item) {
+          const $field = $metaboxes.find(`[name=${item.fieldName}]`)
+          if (!$field.val()) {
+            event.preventDefault()
+            alert(`${item.message}`)
+            return false
+          }
+        })
+      }
+
       if (momentDate.isValid()) {
         $metaboxes.find('[name=published_at]').val(momentDate.format('YYYY-MM-DD HH:mm:ss'))
       }
@@ -206,23 +220,51 @@ function setupSubmit (target) {
         })
       }
 
-      if ($metaboxes.length) {
-        window.jQuery('.__taxonomy-field input').each((idx, item) => {
-          const $this = window.jQuery(item)
-          const fieldName = $this.attr('name')
-          const value = $this.val()
+      data.dispatch('core/editor').savePost()
 
-          if (!$metaboxes.find(`[name=${fieldName}]`).length) {
-            $metaboxes.append(window.jQuery(`<input type="text" name="${fieldName}">`)).val(value)
-          }
-
-          $metaboxes.find(`[name=${fieldName}]`).val(value)
-        })
-      }
-
-      return true
+      return false
     })
   }
+}
+
+function taxonomyFieldsSetup (fieldRequired) {
+  const $ = window.jQuery
+  const $metaboxes = window.jQuery('#metaboxes')
+  const $fields = $('.__taxonomy-field input')
+
+  if (dynamicFieldSetup) {
+    return
+  }
+  dynamicFieldSetup = true
+
+  $fields.each(function () {
+    let $this = $(this)
+    const fieldName = $this.attr('name')
+    const value = $this.val()
+    const required = $this.closest('.components-base-control__field').data('required') || ''
+    const title = $this.closest('.components-base-control__field').data('required-title')
+
+    if (required) {
+      fieldRequired.push({
+        fieldName: fieldName,
+        title: title,
+        message: title + ' 항목을 선택해주세요'
+      })
+    }
+
+    if (!$metaboxes.find(`[name=${fieldName}]`).length) {
+      var $metaField = $(`<input type="text" name="${fieldName}" data-required="${required}" data-required-title="${title}">`)
+      $metaField.val(value)
+      $metaboxes.append($metaField)
+    }
+
+    $this.on('change', function () {
+      const $field = window.jQuery(this)
+      const fieldName = $field.attr('name')
+      const value = $field.val()
+      $metaboxes.find(`[name=${fieldName}]`).val(value)
+    })
+  })
 }
 
 /**
