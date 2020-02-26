@@ -9,6 +9,11 @@
 @import 'editor/editor-image-block'; // image 블럭
 @import 'editor/editor-heading-block'; // heading 블럭
 
+
+.components-notice.is-error {
+  display: none;
+}
+
 .block-editor-block-list__layout {
   .block-editor-block-list__block {
     .block-editor-block-drop-zone {
