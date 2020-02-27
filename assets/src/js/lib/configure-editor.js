@@ -209,7 +209,7 @@ function setupSubmit (target) {
         $metaboxes.find('[name=published_at]').val(momentDate.format('YYYY-MM-DD HH:mm:ss'))
       }
 
-      $tagField.find('.tag-center span').each(function (item) {
+      $tagField.find('.ti-tag-center span').each(function (item) {
         tags.push($(this).text())
       })
 
