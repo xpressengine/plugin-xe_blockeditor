@@ -47,18 +47,15 @@ export default function (config) {
         appMediaLibrary.open({
           importMode: 'embed',
           listMode: 2,
+          selected: function (mediaList, options) {
+            $.each(mediaList, function () {
+              cb(this.file.url, this.file.filename)
+            })
+          },
           user: {
             id: window.XE.config.getters['user/id'],
             rating: window.XE.config.getters['user/rating']
           }
-        })
-
-        appMediaLibrary.$$on('media.import', function (eventName, mediaList, options) {
-
-          // cb()
-          $.each(mediaList, function () {
-            cb(this.file.url, this.file.filename)
-          })
         })
       })
 
