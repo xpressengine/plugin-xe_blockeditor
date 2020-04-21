@@ -3,6 +3,11 @@
   .wp-block-image {
     margin-bottom: 40px;
 
+      img{
+        height: auto;
+      }
+
+
     figcaption {
       font-size: 11px;
       line-height: 1.45;

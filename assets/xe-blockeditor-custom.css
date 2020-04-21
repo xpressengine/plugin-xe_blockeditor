@@ -368,6 +368,10 @@
   margin-bottom: 40px;
 }
 
+.gutenberg__content .wp-block-image img {
+  height: auto;
+}
+
 .gutenberg__content .wp-block-image figcaption {
   font-size: 11px;
   line-height: 1.45;
