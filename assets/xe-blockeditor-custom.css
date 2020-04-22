@@ -309,7 +309,7 @@
 }
 
 .gutenberg__content p {
-  margin-bottom: 28px;
+  margin-bottom: 40px;
   font-weight: 300;
 }
 
@@ -714,6 +714,7 @@
   .xe-blockeditor__editor .is-style-boldjournal__text-indent {
     margin-left: 8.33333%;
     margin-right: 8.33333%;
+    margin-bottom: 60px;
   }
   .theme-boldjournal .gutenberg__content .is-style-boldjournal__text-quote,
   .xe-blockeditor__editor .is-style-boldjournal__text-quote {
