@@ -313,6 +313,16 @@
   font-weight: 300;
 }
 
+.gutenberg__content .wp-block-media-text .wp-block-media-text__content {
+  padding: 0;
+}
+
+@media (min-width: 600px) {
+  .gutenberg__content .wp-block-media-text .wp-block-media-text__content {
+    padding: 0 8% 0 0;
+  }
+}
+
 @media (min-width: 992px) {
   .gutenberg__content .xe-content-xe_blog {
     font-size: 18px;
