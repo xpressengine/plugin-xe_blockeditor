@@ -1,8 +1,8 @@
 {
   "name": "xpressengine-plugin/xe_blockeditor",
-  "description": "XeBlockeditor 에디터를 제공합니다.",
+  "description": "WP의 Gutenberg를 사용한 블록에디터를 활용하여 멋진 글을 완성하세요!",
   "keywords": ["xpressengine bundle", "XE XeBlockeditor"],
-  "version": "1.0.4",
+  "version": "1.0.0",
   "support": {
     "email": "developers@xpressengine.com"
   },
@@ -24,7 +24,7 @@
         "editor/xe_blockeditor@xe_blockeditor": {
           "class": "Xpressengine\\Plugins\\XeBlockeditor\\Components\\Editors\\XeBlockeditor",
           "name": "XeBlockeditor",
-          "description": "XE 에서 사용할 기본 에디터"
+          "description": "Block editor"
         }
       }
     }
